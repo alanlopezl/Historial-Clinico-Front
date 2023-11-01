@@ -1,0 +1,64 @@
+<mat-card class="p-3">
+    <mat-card-title>
+        <h4 class="text-center"><strong>{{_service.register.get('ID_PERMISO')?.value ? "ACTUALIZAR":"CREAR"}}</strong>
+        </h4>
+    </mat-card-title>
+    <mat-card-subtitle>
+        <form [formGroup]="_service.register">
+            <div class="row">
+                <div class="col-sm-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Roles</mat-label>
+                        <mat-select formControlName="ID_ROL">
+                            <mat-option *ngFor="let item of (_roles.response$ | async)" [value]="item.ID_ROL">
+                                {{item.NOMBRE_ROL}}
+                            </mat-option>
+                            <mat-hint align="start" *ngIf="validateOpinion['ID_ROL'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Objetos</mat-label>
+                        <mat-select formControlName="ID_OBJETO">
+                            <mat-option *ngFor="let item of (_objeto.response$ | async)" [value]="item.ID_OBJETO">
+                                {{item.OBJETO}}
+                            </mat-option>
+                            <mat-hint align="start" *ngIf="validateOpinion['ID_OBJETO'].hasError('required')"><strong
+                                    class="text-danger">Campo requerido!</strong> </mat-hint>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <p>
+                        <mat-slide-toggle formControlName="CONSULTAR">Ver</mat-slide-toggle>
+                    </p>
+                    <p>
+                        <mat-slide-toggle formControlName="INSERTAR">Insertar</mat-slide-toggle>
+                    </p>
+                </div>
+
+                <div class="col-sm-6">
+                    <p>
+                        <mat-slide-toggle  formControlName="ACTUALIZAR">Actualizar</mat-slide-toggle>
+                    </p>
+                    <p>
+                        <mat-slide-toggle formControlName="ELIMINAR">Eliminar</mat-slide-toggle>
+                    </p>
+                </div>
+
+
+            </div>
+
+        </form>
+    </mat-card-subtitle>
+    <mat-card-actions>
+        <button mat-raised-button class="m-2 botonnegro" color="primary"  (click)="guardar()"
+            [disabled]="!_service.register">{{_service.register.get('ID_PERMISO')?.value ? "Actualizar":"Crear"
+            }}</button>
+        <button mat-raised-button class="m-2" color="warn" (click)="cerrarmodal()">Cerrar</button>
+    </mat-card-actions>
+</mat-card>
