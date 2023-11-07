@@ -24,18 +24,11 @@ export class FullComponentComponent {
     private _alert: SweetAlertService,
     private _ruter: Router,
   ) {
-    //this._alert.mensajeSimple('Bienvenido a Tecnomaster','','success');
+    //this._alert.mensajeSimple('Bienvenido a tu historial clinico','','success');
     this.fecha = new Date().getFullYear();
-    this._service.mostrarpermisos().subscribe((resp) => {
-      this.permisos = resp;
-    });
-
-    // this._empresa.mostrar();
-    // this._empresa.response$.subscribe((resp) => {
-    //   this.empresa = resp[0];
-    // });
-
-  
+    this._service.mostrarpermisos().subscribe(resp=>{
+      this.permisos = resp
+    })
 
     this._service.mostrarusuario().subscribe((resp) => {
       this.usuario = resp[0];

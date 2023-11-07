@@ -62,6 +62,7 @@ export class PermisosInsertUpdateComponent implements OnInit {
 
 
         this._service.crear(params).subscribe(resp => {
+          console.log(resp);
           if(!resp.ok){
             this._sweet.mensajeSimple(`${resp.data}`,'PERMISOS','warning');
           }else{
