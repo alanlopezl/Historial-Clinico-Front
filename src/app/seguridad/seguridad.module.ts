@@ -17,10 +17,12 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { ParametrosComponent } from './parametros/parametros.component';
 import { ParametrosInsertUpdateComponent } from './parametros/parametros-insert-update/parametros-insert-update.component';
 import { PersonaComponent } from './usuarios/persona/persona.component';
+import { EstadosComponent } from './estados/estados.component';
+import { InsertUpdateEstadoComponent } from './estados/insert-update-estado/insert-update-estado.component';
 
 @NgModule({
   declarations: [UsuariosComponent, UsuariosInsertUpdateComponent,
-     PermisosComponent, PermisosInsertUpdateComponent, ObjetosComponent, ObjetosInsertUpdateComponent, RolesComponent, RolesInsertUpdateComponent, BitacoraComponent, PreguntasComponent, PreguntasInsertUpdateComponent, ParametrosComponent, ParametrosInsertUpdateComponent, PersonaComponent],
+     PermisosComponent, PermisosInsertUpdateComponent, ObjetosComponent, ObjetosInsertUpdateComponent, RolesComponent, RolesInsertUpdateComponent, BitacoraComponent, PreguntasComponent, PreguntasInsertUpdateComponent, ParametrosComponent, ParametrosInsertUpdateComponent, PersonaComponent, EstadosComponent, InsertUpdateEstadoComponent],
   imports: [
     CommonModule,
     SeguridadRoutingModule,

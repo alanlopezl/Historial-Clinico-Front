@@ -50,14 +50,14 @@
         <div class="col-lg-6">
           <mat-form-field appearance="outline">
             <mat-label>Estado</mat-label>
-            <mat-select formControlName="ESTADO">
-              <mat-option value="Nuevo">Nuevo</mat-option>
-              <mat-option value="Activo">Activo</mat-option>
-              <mat-option value="Bloqueado">Bloqueado</mat-option>
+            <mat-select formControlName="ID_ESTADO">
+                <mat-option *ngFor="let item of (_estado.response$ | async)" [value]="item.ID_ESTADO">
+                    {{item.ESTADO}}
+                </mat-option>
+                <mat-hint align="start" *ngIf="validateOpinion['ID_ESTADO'].hasError('required')"><strong
+                        class="text-danger">Campo requerido!</strong> </mat-hint>
             </mat-select>
-            <mat-hint align="start" *ngIf="validateOpinion['ESTADO'].hasError('required')"><strong
-                class="text-danger">Campo requerido!</strong> </mat-hint>
-          </mat-form-field>
+        </mat-form-field>
         </div>
 
       </div>

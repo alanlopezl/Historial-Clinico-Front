@@ -1,0 +1,111 @@
+<div>
+    <div class="col-lg-6">
+        <nav aria-label="breadcrumb">
+            <h1><strong class="text">Pacientes</strong></h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
+                <li class="breadcrumb-item active"><a>Pacientes</a></li>
+            </ol>
+        </nav>
+    </div>
+
+    <mat-card>
+        <mat-card-content>
+
+            <div *ngIf="(_service.responseCargando$ | async)"
+                style="display: flex; align-items: center; justify-content: center;">
+                <mat-spinner></mat-spinner>
+            </div>
+
+            <section *ngIf="!(_service.responseCargando$ | async)">
+
+                <div class="row">
+                    <div class="col-md-6 ">
+
+                        <button mat-raised-button color="accent" class="m-1 botonnegro" (click)="crear()" *ngIf="permisos?.INSERTAR == 'SI'">
+                            <mat-icon>
+                                account_circle
+                            </mat-icon>
+                            Agregar
+                        </button>
+                        
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-end">
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Busqueda</mat-label>
+                            <input matInput placeholder="Buscar" [(ngModel)]="buscar" (change)="busqueda()">
+                            <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>
+
+                    </div>
+
+                </div>
+
+
+
+                <div *ngIf="(_service.response$ | async ).length == 0 && !(_service.responseCargando$ | async)">
+                    <div class="alert alert-warning text-center" role="alert">
+                        No existen roles para mostrar
+                    </div>
+                </div>
+
+                <div class="mt-4"
+                    *ngIf="!(_service.responseCargando$ | async) && (_service.response$| async ).length != 0">
+
+
+                    <div id="reporte" class="table-responsive" *ngIf="(_service.response$ | async ).length != 0">
+                        <table class="table  bordeTabla tablep" role="table">
+                            <thead class="theadp">
+                                <tr class="botonnegro text-center">
+                                    <th class="thp" scope="col" role="columnheader">Id</th>
+                                    <th class="thp" scope="col" role="columnheader">Nombre</th>
+                                    <th class="thp" scope="col" role="columnheader">DNI</th>
+                                    <th class="thp" scope="col" role="columnheader">Fecha Nacimiento</th>
+                                    <th class="thp" scope="col" role="columnheader">Sexo</th>
+                                    <!-- <th class="thp" scope="col" role="columnheader">Carnet Recidencia</th>
+                                    <th class="thp" scope="col" role="columnheader">Pasaporte</th>
+                                    <th class="thp" scope="col" role="columnheader">Permiso Operacion</th> -->
+
+                                    <th *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d"
+                                        class="thp" scope="col" role="columnheader">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="tbodyp">
+                                <tr class="text-center trp" role="row"
+                                    *ngFor="let item of (_service.response$ | async)! | slice:d:h let i = index"
+                                    [attr.data-index]="i">
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.PRIMER_NOMBRE}}
+                                        {{item.PRIMER_APELLIDO}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.DNI}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.FEC_NACIMIENTO | date}}
+                                    </td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.SEXO}}</td>
+
+                                    <td *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d"
+                                        role="cell" data-title="Opciones" class="tdp">
+                                        <div class="text-center">
+                                            <button class="botonnegro" title="Citas" mat-mini-fab
+                                                (click)="crear()">
+                                                <mat-icon>medication</mat-icon>
+                                            </button>
+
+                                            <!-- <button *ngIf="permisos?.ELIMINAR == 'SI'" mat-mini-fab color="warn"  (click)="eliminar(item.COD_PERSONA)" >
+                                                <mat-icon>delete_forever</mat-icon>
+                                            </button> -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <mat-paginator id="d" [length]="(_service.response$|async)?.length" [pageSize]="pageSize"
+                            [pageSizeOptions]="[25,50,100,(_service.response$|async)?.length]"
+                            (page)="cambioPagina($event)">
+                        </mat-paginator>
+                    </div>
+                </div>
+            </section>
+        </mat-card-content>
+    </mat-card>
+</div>

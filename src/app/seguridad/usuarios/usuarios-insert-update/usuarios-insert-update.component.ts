@@ -9,12 +9,16 @@ import { UsuariosPackageService } from '../usuarios-package.service';
 import { Observable, map, startWith } from 'rxjs';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { PersonaComponent } from '../persona/persona.component';
+import { EstadoPackageService } from '../../estados/estado-package.service';
+
 @Component({
   selector: 'app-usuarios-insert-update',
   templateUrl: './usuarios-insert-update.component.html',
   styleUrls: ['./usuarios-insert-update.component.css'],
 })
+
 export class UsuariosInsertUpdateComponent implements OnInit {
+
   hide: boolean = false;
   @ViewChild(MatAutocompleteTrigger) _auto: MatAutocompleteTrigger;
   options: any[] = [];
@@ -23,7 +27,6 @@ export class UsuariosInsertUpdateComponent implements OnInit {
   nombreproducto: string;
   optionsarticulo: any[] = [];
   filteredArticulos: Observable<any[]>;
-
   nombre:string;
 
   constructor(
@@ -31,19 +34,20 @@ export class UsuariosInsertUpdateComponent implements OnInit {
     public dialogref: MatDialogRef<UsuariosInsertUpdateComponent>,
     private _dialog: MatDialog,
     public _roles: RolesPackageService,
-    //public _persona: PersonasPackageService,
+    public _estado: EstadoPackageService,
     private _sweet: SweetAlertService,
     private _bitacora: BitacoraPackageService
   ) {
+
     this._roles.mostrar();
+    this._estado.mostrar();
+    
+
   }
 
   ngOnInit(): void {
   
   }
-
-
-
 
   //limpia modal
   clear() {
@@ -55,6 +59,7 @@ export class UsuariosInsertUpdateComponent implements OnInit {
   cerrarmodal() {
     this.dialogref.close();
   }
+
   get validateOpinion() {
     return this._service.register.controls;
   }
@@ -78,11 +83,10 @@ export class UsuariosInsertUpdateComponent implements OnInit {
             rol: datos.ID_ROL,
             usuario: datos.USUARIO,
             correo: datos.EMAIL,
-            estado: 'Nuevo',
+            estado: 4
           };
 
           this._service.crear(params).subscribe((resp) => {
-            console.log(resp);
             if (!resp.ok) {
               this._sweet.mensajeSimple(resp.msg, 'USUARIOS', 'warning');
             } else {
@@ -120,7 +124,7 @@ export class UsuariosInsertUpdateComponent implements OnInit {
           rol: datos.ID_ROL,
           usuario: datos.USUARIO,
           correo: datos.EMAIL,
-          estado: datos.ESTADO,
+          estado: datos.ID_ESTADO
         };
 
         this._service.actualizar(params).subscribe((resp: any) => {
