@@ -15,7 +15,7 @@ export class MedicosInsertUpdateComponent {
 
   fecha: Date = new Date();
   especialidad:any = [];
-  
+
   constructor(
     public _service: MedicosPackageService,
     public dialogref: MatDialogRef<MedicosInsertUpdateComponent>,
@@ -60,7 +60,6 @@ export class MedicosInsertUpdateComponent {
         };
 
         this._service.crear(params).subscribe((resp) => {
-          console.log(resp);
           if (!resp.ok) {
             this._sweet.mensajeSimple(resp.msg, 'MEDICO', 'warning');
           } else {
@@ -94,9 +93,11 @@ export class MedicosInsertUpdateComponent {
           nacimiento: datos.FEC_NACIMIENTO,
           estado: datos.EST_CIVIL,
           sexo: datos.SEXO,
-          tipo:1
+          idtipo:1
         };
+       
         this._service.actualizar(params).subscribe((resp: any) => {
+          console.log(resp);
           this._sweet.mensajeSimple(
             'Actualizado correctamente',
             'MEDICO',

@@ -24,7 +24,6 @@ export class MedicosPackageService {
   private url = `${environment.url}personaMedico`;
 
   constructor(private _http:HttpClient,private _globals:GlobalService) { }
-
  
   register: FormGroup = new FormGroup({
     COD_PERSONA: new FormControl(null),
@@ -51,7 +50,19 @@ export class MedicosPackageService {
   }
 
   popForm(data:any){
-    this.register.setValue(data);
+    this.register.patchValue({
+      COD_PERSONA:data.COD_PERSONA,
+      PRIMER_NOMBRE:data.PRIMER_NOMBRE,
+      SEGUNDO_NOMBRE:data.SEGUNDO_NOMBRE,
+      PRIMER_APELLIDO:data.PRIMER_APELLIDO,
+      SEGUNDO_APELLIDO:data.SEGUNDO_APELLIDO,
+      DNI:data.DNI,
+      FEC_NACIMIENTO:data.FEC_NACIMIENTO,
+      SEXO:data.SEXO
+     } )
+
+     console.log(this.register.value);
+   // this.register.setValue(data);
   }
 
    mostrar(busqueda: string=""){
