@@ -90,25 +90,9 @@
                         <mat-hint>DD/MM/YYYY</mat-hint>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
-
                     </mat-form-field>
                 </div>
-
-
             </div>
-
-            <!-- <div class="row">
-                <h4><strong>Especialidad</strong></h4>
-    
-                    <div class="row">
-                        <div class="col-lg-2" *ngFor="let item of (_especialidad.response$ | async)">
-                            <mat-checkbox [(ngModel)]="especialidad[item.ID_ESPECIALIDAD]">{{item.NOMBRE}}</mat-checkbox>
-                        </div>
-                    </div>
-              
-            </div> -->
-
-
         </form>
     </mat-card-subtitle>
     <mat-card-actions>

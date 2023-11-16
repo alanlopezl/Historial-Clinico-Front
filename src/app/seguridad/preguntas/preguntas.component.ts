@@ -57,7 +57,13 @@ export class PreguntasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    let params = {
+      idusuario:localStorage.getItem('user'),
+      idobjeto:6,
+      descripcion:'',
+      accion:'Ingreso'
+    }
+    this._bitacora.crear(params).subscribe();
   }
 
   ngOnDestroy(): void {

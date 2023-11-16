@@ -48,7 +48,15 @@ export class ParametrosComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let params = {
+      idusuario:localStorage.getItem('user'),
+      idobjeto:10,
+      descripcion:'',
+      accion:'Ingreso'
+    }
+    this._bitacora.crear(params).subscribe();
+  }
 
   ngOnDestroy(): void {}
 

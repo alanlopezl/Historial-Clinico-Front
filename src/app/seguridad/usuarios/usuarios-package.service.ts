@@ -51,7 +51,7 @@ export class UsuariosPackageService {
 
   popForm(data: any) {
     this.nombre = data.PERSONA; 
-    this.register.get('ESTADO').enable();
+    //this.register.get('ESTADO').enable();
     this.register.patchValue({
       ID_USUARIO: data.ID_USUARIO,
       COD_PERSONA: data.COD_PERSONA,

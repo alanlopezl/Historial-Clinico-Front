@@ -14,7 +14,28 @@
         <mat-card-content>
             <div class="row">
                 <h4><strong>Nueva especialidad</strong></h4>
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Especialidad</mat-label>
+                        <mat-select [(ngModel)]="especialidad">
+                            <mat-option *ngFor="let item of (_service.response$ | async)"
+                                [value]="item.ID_ESPECIALIDAD">
+                                {{item.NOMBRE}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <button mat-raised-button color="accent" class="m-1 botonnegro" (click)="crear()"
+                        *ngIf="permisos?.INSERTAR == 'SI'">
+                        <mat-icon>
+                            account_circle
+                        </mat-icon>
+                        Agregar
+                    </button>
+                </div>
             </div>
+
         </mat-card-content>
     </mat-card>
     <br>
@@ -32,13 +53,7 @@
 
                     <div class="col-md-6 ">
 
-                        <button mat-raised-button color="accent" class="m-1 botonnegro" (click)="crear()"
-                            *ngIf="permisos?.INSERTAR == 'SI'">
-                            <mat-icon>
-                                account_circle
-                            </mat-icon>
-                            Agregar
-                        </button>
+
                     </div>
                     <div class="col-md-6 d-flex justify-content-end">
 
@@ -52,16 +67,15 @@
                 </div>
 
                 <div class="mt-4"
-                    *ngIf="(_service.response$ | async ).length == 0 && !(_service.responseCargando$ | async)">
+                    *ngIf="(_service.responseid$ | async ).length == 0 ">
                     <div class="alert alert-warning text-center" role="alert">
                         No existen roles para mostrar
                     </div>
                 </div>
-                <div class="mt-4"
-                    *ngIf="!(_service.responseCargando$ | async) && (_service.response$| async ).length != 0">
+                
 
 
-                    <div id="reporte" class="table-responsive" *ngIf="(_service.response$ | async ).length != 0">
+                    <div id="reporte" class="table-responsive" *ngIf="(_service.responseid$ | async ).length != 0">
                         <table class="table  bordeTabla tablep" role="table">
                             <thead class="theadp">
                                 <tr class="botonnegro text-center">
@@ -74,7 +88,7 @@
                             </thead>
                             <tbody role="rowgroup" class="tbodyp">
                                 <tr class="text-center trp" role="row" [attr.data-index]="i"
-                                    *ngFor="let item of (_service.response$ | async)! | slice:d:h let i = index"
+                                    *ngFor="let item of (_service.responseid$ | async)! | slice:d:h let i = index"
                                     [attr.data-index]="i">
                                     <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.NOMBRE | uppercase}}</td>
@@ -97,12 +111,12 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <mat-paginator id="d" [length]="(_service.response$|async)?.length"
-                            [pageSizeOptions]="[25, 50,100,(_service.response$|async)?.length]" [pageSize]="pageSize"
+                        <mat-paginator id="d" [length]="(_service.responseid$|async)?.length"
+                            [pageSizeOptions]="[25, 50,100,(_service.responseid$|async)?.length]" [pageSize]="pageSize"
                             (page)="cambioPagina($event)">
                         </mat-paginator>
                     </div>
-                </div>
+              
             </section>
         </mat-card-content>
     </mat-card>

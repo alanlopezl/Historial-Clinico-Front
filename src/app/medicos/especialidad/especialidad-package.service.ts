@@ -72,6 +72,10 @@ export class EspecialidadPackageService {
     return this._http.post(this.url,params).pipe(map((resp:any)=>resp));
   }
 
+  crearMedico(params:any):Observable<any>{
+    return this._http.post(environment.url+'especialidadMedico',params).pipe(map((resp:any)=>resp));
+  }
+
   actualizar(params:any):Observable<any>{
     return this._http.put(this.url,params).pipe(map((resp:any)=>resp));
   }

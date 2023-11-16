@@ -74,6 +74,15 @@ export class MedicosPackageService {
     return request$.subscribe();
   }
 
+  mostrarid(id: number){
+    this.Cargando$.next(true);
+    const request$ = this._globals.obtener('personaMedico/'+id).pipe(tap((resp:any)=>{
+    this.Cargando$.next(false);
+     this.medico.next(resp)
+   }));
+    return request$.subscribe();
+  }
+
   mostrarpermiso(rol:any,objeto){
     const request$ = this._globals.obtener(`permisossistemaid/${rol}/${objeto}`).pipe(tap((resp:any)=>{
      this.permiso.next(resp)

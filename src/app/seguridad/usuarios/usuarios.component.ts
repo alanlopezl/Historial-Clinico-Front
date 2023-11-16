@@ -56,6 +56,13 @@ export class UsuariosComponent implements OnInit {
 
   ngOnInit(): void {
     let solicitud: any = JSON.parse(localStorage.getItem('usuario')!);
+    let params = {
+      idusuario:localStorage.getItem('user'),
+      idobjeto:2,
+      descripcion:'',
+      accion:'Ingreso'
+    }
+    this._bitacora.crear(params).subscribe();
   }
   ngOnDestroy(): void {}
 

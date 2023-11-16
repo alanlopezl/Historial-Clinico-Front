@@ -77,7 +77,7 @@
                                                 <mat-icon>create</mat-icon>
                                             </button>
                                             
-                                            <button  mat-mini-fab color="warn"  [routerLink]="['/medico/especialidad/'+1]" routerLinkActive="router-link-active"  title="Especialidades" >
+                                            <button  mat-mini-fab color="warn"  [routerLink]="['/medico/especialida']" [queryParams]="{ id: item.COD_PERSONA }"  title="Especialidades" >
                                                 <mat-icon>medical_information</mat-icon>
                                             </button>
                                         </div>

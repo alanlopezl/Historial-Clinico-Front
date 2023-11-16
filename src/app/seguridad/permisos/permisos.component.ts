@@ -48,7 +48,15 @@ export class PermisosComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let params = {
+      idusuario:localStorage.getItem('user'),
+      idobjeto:5,
+      descripcion:'',
+      accion:'Ingreso'
+    }
+    this._bitacora.crear(params).subscribe();
+  }
 
   ngOnDestroy(): void {
 

@@ -6,14 +6,14 @@ import { GlobalService } from 'src/app/services/global.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import * as XLSX from 'xlsx';
 import { EspecialidadPackageService } from '../../especialidad/especialidad-package.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-especialidad',
   templateUrl: './especialidad.component.html',
-  styleUrls: ['./especialidad.component.css']
+  styleUrls: ['./especialidad.component.css'],
 })
 export class EspecialidadComponent {
-
   pageSize: number = 25;
   pageSizeOptions: number[] = [25, 50, 100];
   pageEvent!: PageEvent;
@@ -27,27 +27,33 @@ export class EspecialidadComponent {
   reporte: boolean = false;
   data: any = [];
   item: any = [];
-
   usuario: any; //paso //2
-
   permisos: any = [];
+  especialidad: any;
+  id: any;
 
   constructor(
     public _service: EspecialidadPackageService,
     private _dialog: MatDialog,
     private _bitacora: GlobalService,
     private _sweet: SweetAlertService,
-    private paginator: MatPaginatorIntl
+    private paginator: MatPaginatorIntl,
+    private _router: ActivatedRoute
   ) {
+    this._service.mostrar();
     paginator.itemsPerPageLabel = 'Cantidad por página';
-    this._service.mostrar(this.buscar);
     this._service.mostrarpermiso(localStorage.getItem('rol'), 3);
     this._service.responsepermiso$.subscribe((r) => {
       this.permisos = r[0];
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._router.queryParams.subscribe((id) => {
+      this.id = id['id'];
+      this._service.mostrarid(id['id']);
+    });
+  }
 
   busqueda() {
     this._service.mostrar(this.buscar);
@@ -61,12 +67,32 @@ export class EspecialidadComponent {
   }
 
   crear() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '20%';
-    // this._dialog.open(EspecialidadInsertUpdateComponent);
-    // this._service.inicializarForm();
+    if (this.especialidad != '') {
+      let params = {
+        persona: this.id,
+        especialidad: this.especialidad,
+      };
+
+      this._service.crearMedico(params).subscribe((resp) => {
+        if (!resp.ok) {
+          this._sweet.mensajeSimple(resp.msg, 'ESPECIALIDAD', 'warning');
+        } else {
+          this._sweet.mensajeSimple(
+            'Agregada correctamente',
+            'Especialidad',
+            'success'
+          );
+          let params = {
+            operacion: 'INSERTO',
+            fecha: new Date(),
+            idusuario: localStorage.getItem('user'),
+            tabla: 'ESPECIALIDAD',
+          };
+          this._bitacora.crear(params).subscribe();
+        }
+        this._service.mostrarid(this.id);
+      });
+    }
   }
 
   editar(item: any) {
@@ -149,5 +175,4 @@ export class EspecialidadComponent {
     };
     this._bitacora.crear(params).subscribe((resp) => resp);
   }
-
 }

@@ -67,8 +67,8 @@
                                     <th class="thp" scope="col" role="columnheader">Pasaporte</th>
                                     <th class="thp" scope="col" role="columnheader">Permiso Operacion</th> -->
 
-                                    <th *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d"
-                                        class="thp" scope="col" role="columnheader">Opciones</th>
+                                    <!-- <th *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d"
+                                        class="thp" scope="col" role="columnheader">Opciones</th> -->
                                 </tr>
                             </thead>
                             <tbody role="rowgroup" class="tbodyp">
@@ -86,10 +86,10 @@
                                     <td *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d"
                                         role="cell" data-title="Opciones" class="tdp">
                                         <div class="text-center">
-                                            <button class="botonnegro" title="Citas" mat-mini-fab
+                                            <!-- <button class="botonnegro" title="Citas" mat-mini-fab
                                                 (click)="crear()">
                                                 <mat-icon>medication</mat-icon>
-                                            </button>
+                                            </button> -->
 
                                             <!-- <button *ngIf="permisos?.ELIMINAR == 'SI'" mat-mini-fab color="warn"  (click)="eliminar(item.COD_PERSONA)" >
                                                 <mat-icon>delete_forever</mat-icon>

@@ -49,7 +49,15 @@ export class RolesComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let params = {
+      idusuario:localStorage.getItem('user'),
+      idobjeto:3,
+      descripcion:'',
+      accion:'Ingreso'
+    }
+    this._bitacora.crear(params).subscribe();
+  }
 
   busqueda() {
     this._service.mostrar(this.buscar);
@@ -101,11 +109,11 @@ export class RolesComponent implements OnInit {
               );
             } else {
               let params = {
-                operacion: 'ELIMINO',
-                fecha: new Date(),
-                idusuario: localStorage.getItem('user'),
-                tabla: 'ROLES',
-              };
+                idusuario:localStorage.getItem('user'),
+                idobjeto:3,
+                descripcion:'',
+                accion:'Elimino'
+              }
               this._bitacora.crear(params).subscribe();
               this._sweet.mensajeSimple(
                 'Eliminado correctamente',
@@ -119,36 +127,39 @@ export class RolesComponent implements OnInit {
   }
 
   impo() {
+    
     let date = new Date();
-    let url = '../../../assets/logo.jpg';
+   // let url = '../../../assets/logo.jpg';
     let rawHTML = `
   <div id="otra">
-  <img src="${url}" alt="">
+  <img src="" alt="">
   <div class="parraf">
-  <h5>Agrocomercial "Libertad"</h5>
+  <h5>Dental center</h5>
   <h5>Listado de Roles</h5>
   <h6>${date.toLocaleString()}</h6>
   </div>
   </div><br>`;
 
     printJS({
-      printable: 'reporte2',
+      printable: 'reporte',
       type: 'html',
       header: rawHTML,
       css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
       style:
-        '@page {   margin-left: 10%; } #otra {display: block  } #otra img { max-width: 140px;} .parraf { width: 100%; padding: 0px; text-align: center;  max-height: 80px, margin-left: 90%; }',
+        '@page { margin-left: 10%; } #otra {display: block  } #otra img { max-width: 140px;} .parraf { width: 100%; padding: 0px; text-align: center;  max-height: 80px, margin-left: 90%; }',
       scanStyles: false,
       documentTitle: 'Roles',
       font_size: '10pt',
       ignoreElements: ['d'],
     });
+
+    console.log('object');
     let params = {
-      operacion: 'DESCARGO PDF',
-      fecha: new Date(),
-      idusuario: localStorage.getItem('user'),
-      tabla: 'ROLES',
-    };
+      idusuario:localStorage.getItem('user'),
+      idobjeto:3,
+      descripcion:'',
+      accion:'Descargo PDF'
+    }
     this._bitacora.crear(params).subscribe((resp) => resp);
   }
 }

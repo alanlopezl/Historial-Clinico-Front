@@ -11,7 +11,7 @@ const routes: Routes = [
     path:'especialidad',component:EspecialidadComponent
   },
   {
-    path:'especialidad/:id',component:espe
+    path:'especialida',component:espe
   }
 ];
 
