@@ -8,6 +8,8 @@ import { CitasInsertUpdateComponent } from './citas/citas-insert-update/citas-in
 import { PacientesInsertUpdateComponent } from './pacientes/pacientes-insert-update/pacientes-insert-update.component';
 import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TratamientoComponent } from './tratamiento/tratamiento.component';
+import { TratamientoPackageComponent } from './tratamiento/tratamiento-package/tratamiento-package.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PacientesComponent,
     CitasComponent,
     CitasInsertUpdateComponent,
-    PacientesInsertUpdateComponent
+    PacientesInsertUpdateComponent,
+    TratamientoComponent,
+    TratamientoPackageComponent
   ],
   imports: [
     CommonModule,

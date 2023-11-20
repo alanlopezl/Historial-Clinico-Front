@@ -171,4 +171,12 @@ export class UsuariosComponent implements OnInit {
     };
     this._bitacora.crear(params).subscribe((resp) => resp);
   }
+
+  upperTeeth: number[] = Array.from({ length: 8 }, (_, i) => i + 1);
+  lowerTeeth: number[] = Array.from({ length: 8 }, (_, i) => 32 - i);
+
+  toggleSelected(toothNumber: number): void {
+    // Implement your logic here to handle the selection state
+    console.log(`Tooth ${toothNumber} clicked`);
+  }
 }

@@ -58,7 +58,7 @@ export class UsuariosPackageService {
       ID_ROL: data.ID_ROL,
       USUARIO: data.USUARIO,
       EMAIL: data.EMAIL,
-      ID_ESTADO: data.ID_ESTADO,
+      ID_ESTADO: data.ID_ESTADO
     });
   }
 

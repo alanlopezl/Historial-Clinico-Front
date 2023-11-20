@@ -111,14 +111,12 @@
                                     <td *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d"
                                         role="cell" data-title="Opciones" class="tdp">
                                         <div class="text-center">
-                                            <button class="botonnegro" title="Citas" mat-mini-fab
-                                                (click)="crear()">
+                                            <button class="botonnegro" title="Tratamiento" mat-mini-fab
+                                                routerLink="/pacientes/tratamiento">
                                                 <mat-icon>medication</mat-icon>
                                             </button>
 
-                                            <!-- <button *ngIf="permisos?.ELIMINAR == 'SI'" mat-mini-fab color="warn"  (click)="eliminar(item.COD_PERSONA)" >
-                                                <mat-icon>delete_forever</mat-icon>
-                                            </button> -->
+                                           
                                         </div>
                                     </td>
                                 </tr>
