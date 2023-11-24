@@ -14,6 +14,12 @@ export class MedicosPackageService {
 
   private medico = new BehaviorSubject<any[]>([]);
   public response$: Observable<any[]> = this.medico.asObservable();
+
+
+  private medicoM = new BehaviorSubject<any[]>([]);
+  public responseM$: Observable<any[]> = this.medicoM.asObservable();
+
+
   
   private permiso = new BehaviorSubject<any[]>([]);
   public responsepermiso$: Observable<any[]> = this.permiso.asObservable();
@@ -79,6 +85,14 @@ export class MedicosPackageService {
     const request$ = this._globals.obtener('personaMedico/'+id).pipe(tap((resp:any)=>{
     this.Cargando$.next(false);
      this.medico.next(resp)
+   }));
+    return request$.subscribe();
+  }
+
+  mostraridespe(id: number){
+    const request$ = this._globals.obtener('personaM/'+id).pipe(tap((resp:any)=>{
+      console.log(resp);
+     this.medicoM.next(resp)
    }));
     return request$.subscribe();
   }

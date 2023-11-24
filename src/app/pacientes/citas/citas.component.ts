@@ -54,7 +54,7 @@ export class CitasComponent {
   }
 
   ngOnInit(): void {
-    this._medico.mostrar();
+    
   }
 
   busqueda() {
@@ -64,14 +64,14 @@ export class CitasComponent {
 
   //muestra especialidad del select
   mostrar(event: any) {
-    this._service.idmedico = event.value;
-    this._especialidad.mostrarid(event.value);
+    this._service.idespecialidad = event.value;
+    this._medico.mostraridespe(event.value);
   }
 
   //muestra la tabla
   mostrardta(event: any) {
-    this._service.idespecialidad = event.value;
-    this._service.mostrarfiltro(this._service.idmedico, event.value);
+    this._service.idmedico = event.value;
+    this._service.mostrarfiltro(this._service.idespecialidad,event.value);
   }
 
   ngOnDestroy(): void {}

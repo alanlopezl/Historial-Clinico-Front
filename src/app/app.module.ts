@@ -17,6 +17,7 @@ import { PreguntasSeguridadComponent } from './auth/preguntas-seguridad/pregunta
 import { RecuPreguntasComponent } from './auth/recu-preguntas/recu-preguntas.component';
 import { RecuCorreoComponent } from './auth/recu-correo/recu-correo.component';
 import { CambioPassComponent } from './auth/cambio-pass/cambio-pass.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CambioPassComponent } from './auth/cambio-pass/cambio-pass.component';
     PreguntasSeguridadComponent,
     RecuPreguntasComponent,
     RecuCorreoComponent,
-    CambioPassComponent
+    CambioPassComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

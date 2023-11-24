@@ -22,7 +22,9 @@
                 <div class="row">
                    
                     <div class="col-md-6 ">
-                      
+                        <button mat-raised-button type="button" class="m-1" color="warn" (click)="impo()">
+                            PDF
+                        </button>
                         <button class="m-1 botonnegro" *ngIf="permisos?.INSERTAR == 'SI'" mat-raised-button color="accent" (click)="crear()">
                             <mat-icon>
                                 account_circle

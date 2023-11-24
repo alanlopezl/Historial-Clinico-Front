@@ -15,8 +15,6 @@ import * as XLSX from 'xlsx';
 })
 export class PreguntasComponent implements OnInit {
 
-
-
   //paginacion
   pageSize: number = 25;
   pageSizeOptions: number[] = [25, 50, 100];
@@ -25,13 +23,11 @@ export class PreguntasComponent implements OnInit {
   h: number = 25; //hasta donde
 
   //filtro
-
   buscar: any = '';
   campo: any[] = ['PREGUNTA'];
   reporte: boolean = false;
   data: any = [];
   item: any = [];
-
   usuario: any;//paso //2
   i: number = 0;
   permisos:any = [];
@@ -48,8 +44,6 @@ export class PreguntasComponent implements OnInit {
     this._service.responsepermiso$.subscribe(r=>{
      this.permisos = r[0];
     })
-
-
   }
 
   busqueda(){
@@ -66,30 +60,15 @@ export class PreguntasComponent implements OnInit {
     this._bitacora.crear(params).subscribe();
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy(): void {}
 
-  }
-  excel() {
-    let worksheetData: any[] = [];
-    let data:any[] = [];
-    this._service.mostrar(this.buscar)
-    this._service.response$.subscribe((r) => {
-      data = r
-    });
-    let workbook = XLSX.utils.book_new();
-    let worksheet = XLSX.utils.json_to_sheet(data);
-    workbook.SheetNames.push('Hoja 1');
-    workbook.Sheets['Hoja 1'] = worksheet;
-
-    XLSX.writeFileXLSX(workbook, 'Preguntas.xlsx', {});
-  }
 
   cambioPagina(e: PageEvent) {
     this.d = e.pageIndex * e.pageSize;
     this.h = this.d + e.pageSize;
   }
-  crear() {
 
+  crear() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -108,7 +87,6 @@ export class PreguntasComponent implements OnInit {
   }
 
   eliminar(id: number) {
-
     this._sweet.mensajeConConfirmacion('Eliminar', '¿Desea eliminar el registro?', 'warning').
       then((result) => {
         console.log(result);
@@ -130,24 +108,24 @@ export class PreguntasComponent implements OnInit {
           })
         }
       })
-
   }
+
 
   impo() {
   let date = new Date();
-    let url = '../../../assets/logo.jpg';
-    let rawHTML = `
+  let url = '../../../assets/assets/img/ft.jpg';
+  let rawHTML = `
   <div id="otra">
   <img src="${url}" alt="">
   <div class="parraf">
-  <h5>Agrocomercial "Libertad"</h5>
+  <h5>Data Center</h5>
   <h5>Listado de Preguntas</h5>
   <h6>${date.toLocaleString()}</h6>
   </div>
   </div><br>`;
 
     printJS({
-      printable: 'reporte2',
+      printable: 'reporte',
       type: 'html',
       header: rawHTML,
       css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',

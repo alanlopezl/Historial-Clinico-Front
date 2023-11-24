@@ -112,26 +112,27 @@ export class PacientesComponent {
 
   impo() {
     let date = new Date();
-    let url = '../../../assets/logo.jpg';
+    let url = '../../../assets/assets/img/ft.jpg';
+
     let rawHTML = `
-  <div id="otra">
-  <img src="${url}" alt="">
-  <div class="parraf">
-  <h5></h5>
-  <h5>Listado de Pacientes</h5>
-  <h6>${date.toLocaleString()}</h6>
-  </div>
-  </div><br>`;
+   <div id="otra">
+   <img src="${url}" alt="">
+   <div class="parraf">
+   <h5>Dental Center</h5>
+   <h5>Listado de Pacientes</h5>
+   <h6>${date.toLocaleString()}</h6>
+   </div>
+   </div><br>`;
 
     printJS({
-      printable: 'reporte2',
+      printable: 'reporte',
       type: 'html',
       header: rawHTML,
       css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
       style:
         '@page {   margin-left: 10%; } #otra {display: block  } #otra img { max-width: 140px;} .parraf { width: 100%; padding: 0px; text-align: center;  max-height: 80px, margin-left: 90%; }',
       scanStyles: false,
-      documentTitle: 'Pacientes',
+      documentTitle: 'Paciente',
       font_size: '10pt',
       ignoreElements: ['d'],
     });
@@ -139,7 +140,7 @@ export class PacientesComponent {
       operacion: 'DESCARGO PDF',
       fecha: new Date(),
       idusuario: localStorage.getItem('user'),
-      tabla: 'PACIENTES',
+      tabla: 'PACIENTE',
     };
     this._bitacora.crear(params).subscribe((resp) => resp);
   }

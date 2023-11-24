@@ -18,24 +18,15 @@
                 <mat-spinner></mat-spinner>
             </div>
 
-
-            <div class="odontogram">
-  <!-- Upper teeth -->
-  <div *ngFor="let toothNumber of upperTeeth" class="tooth" (click)="toggleSelected(toothNumber)">
-    {{ toothNumber }}
-  </div>
-
-  <!-- Lower teeth -->
-  <div *ngFor="let toothNumber of lowerTeeth" class="tooth" (click)="toggleSelected(toothNumber)">
-    {{ toothNumber }}
-  </div>
-</div>
             <section *ngIf="!(_service.responseCargando$ | async)">
 
                 <div class="row">
                  
 
                     <div class="col-md-6 ">
+                        <button mat-raised-button type="button" class="m-1" color="warn" (click)="impo()">
+                            PDF
+                        </button>
                         <button  *ngIf="permisos?.INSERTAR == 'SI'" mat-raised-button color="accent" class="m-1 botonnegro"
                             (click)="crear()">
                             <mat-icon>

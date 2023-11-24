@@ -72,35 +72,34 @@ export class BitacoraComponent implements OnInit {
 
   impo() {
     let date = new Date();
-    let url = '../../../assets/logo.jpg';
+    let url = '../../../assets/assets/img/ft.jpg';
     let rawHTML = `
     <div id="otra">
     <img src="${url}" alt="">
     <div class="parraf">
-    <h5>Agrocomercial "Libertad"</h5>
-    <h5>Listado de Bitácora</h5>
+    <h5>Data Center</h5>
+    <h5>Listado de Bitacora</h5>
     <h6>${date.toLocaleString()}</h6>
     </div>
     </div><br>`;
-
-    printJS({
-      printable: 'reporte2',
-      type: 'html',
-      header: rawHTML,
-      css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
-      style:
-        '@page {   margin-left: 10%; } #otra {display: block  } #otra img { max-width: 140px;} .parraf { width: 100%; padding: 0px; text-align: center;  max-height: 80px, margin-left: 90%; }',
-      scanStyles: false,
-      documentTitle: 'Objetos',
-      font_size: '10pt',
-      ignoreElements: ['d'],
-    });
-    let params = {
-      operacion: 'DESCARGO PDF',
-      fecha: new Date(),
-      idusuario: localStorage.getItem('user'),
-      tabla: 'BITACORA',
-    };
-    this._bitacora.crear(params).subscribe((resp) => resp);
-  }
+  
+      printJS({
+        printable: 'reporte',
+        type: 'html',
+        header: rawHTML,
+        css: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+        style: '@page {   margin-left: 10%; } #otra {display: block  } #otra img { max-width: 140px;} .parraf { width: 100%; padding: 0px; text-align: center;  max-height: 80px, margin-left: 90%; }',
+        scanStyles: false,
+        documentTitle: 'Bitacora',
+        font_size: '10pt',
+        ignoreElements: ['d']
+      })
+       let params = {
+        operacion: 'DESCARGO BITACORA',
+        fecha: new Date(),
+        idusuario: localStorage.getItem('user'),
+        tabla: 'BITACORA'
+     };
+      this._bitacora.crear(params).subscribe((resp) => resp);
+    }
 }

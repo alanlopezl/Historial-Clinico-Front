@@ -10,6 +10,7 @@ import { PreguntasSeguridadComponent } from './auth/preguntas-seguridad/pregunta
 import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './guard/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -26,6 +27,9 @@ const routes: Routes = [
     children: [
       {
         path:'dashboard',component:DashboardComponent
+      },
+      {
+        path:'perfil',component:PerfilComponent
       },
       {
         path: 'seguridad',

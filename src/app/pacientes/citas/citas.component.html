@@ -15,20 +15,20 @@
             <div class="row">
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
-                        <mat-label>Medico</mat-label>
-                        <mat-select [(ngModel)]="medico" (selectionChange)="mostrar($event)" >
-                            <mat-option *ngFor="let item of (_medico.response$ | async)" [value]="item.COD_PERSONA">
-                                {{item.PRIMER_NOMBRE}} {{ item.PRIMER_APELLIDO }} - {{item.DNI}}
+                        <mat-label>Especialidad</mat-label>
+                        <mat-select [(ngModel)]="especialidad"  (selectionChange)="mostrar($event)">
+                            <mat-option *ngFor="let item of (_especialidad.response$ | async)" [value]="item.ID_ESPECIALIDAD">
+                                {{item.NOMBRE}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
-                        <mat-label>Especialidad</mat-label>
-                        <mat-select [(ngModel)]="especialidad" (selectionChange)="mostrardta($event)" >
-                            <mat-option *ngFor="let item of (_especialidad.responseid$ | async)" [value]="item.ID_ESPECIALIDAD">
-                                {{item.NOMBRE}}
+                        <mat-label>Medico</mat-label>
+                        <mat-select [(ngModel)]="medico"  (selectionChange)="mostrardta($event)">
+                            <mat-option *ngFor="let item of (_medico.responseM$ | async)" [value]="item.COD_PERSONA">
+                                {{item.PRIMER_NOMBRE}} {{ item.PRIMER_APELLIDO }} - {{item.DNI}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -112,7 +112,7 @@
                                         role="cell" data-title="Opciones" class="tdp">
                                         <div class="text-center">
                                             <button class="botonnegro" title="Tratamiento" mat-mini-fab
-                                                routerLink="/pacientes/tratamiento">
+                                                routerLink="/pacientes/tratamiento"  [queryParams]="item">
                                                 <mat-icon>medication</mat-icon>
                                             </button>
 

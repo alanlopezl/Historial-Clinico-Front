@@ -9,32 +9,26 @@ import { map, tap } from 'rxjs/operators';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
-  ventas: number;
-  compras: number;
-  productos: any[];
-  clientes: number;
+
+  
+  pacientes: number;
   usuarios: number;
-  permisos: string;
+  medico:number
+ 
 
   constructor(private http: HttpClient) {
-    // this._service.mostrarpermiso(localStorage.getItem('rol'),10);
-    // this._service.responsepermiso$.subscribe(r=>{
-    //  this.permisos = r[0];
-    // })
 
-    this.mostrarpermiso();
+    this.http.get(environment.url+'countP').subscribe((resp:any)=>{
+      this.pacientes = resp.data[0].id
+    })
 
+    this.http.get(environment.url+'countM').subscribe((resp:any)=>{
+      this.medico = resp.data[0].id
+    })
+    this.http.get(environment.url+'countU').subscribe((resp:any)=>{
+      this.usuarios = resp.data[0].id
+    })
   }
 
-  mostrarpermiso() {
-    this.http
-      .get(
-        environment.url +
-          `permisossistemaid/${localStorage.getItem('rol')}/${30}`
-      )
-      .subscribe((resp: any) => {
-        console.log(resp);
-        this.permisos = resp.data[0].CONSULTAR;
-      });
-  }
+ 
 }
