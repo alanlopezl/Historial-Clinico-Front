@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import * as Notiflix from 'notiflix';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { environment } from 'src/environments/environment.prod';
@@ -21,10 +21,10 @@ export class TratamientoComponent {
   constructor(
     private http: HttpClient,
     private query: ActivatedRoute,
-    private _swwet: SweetAlertService
+    private _swwet: SweetAlertService,
+    private _route:Router
   ) {
     this.query.queryParams.subscribe((r) => {
-      console.log(r);
       this.data = r;
     });
   }
@@ -58,6 +58,7 @@ export class TratamientoComponent {
 
           if(resp.ok){
            Notiflix.Notify.success('Guardado correctamente');
+           this._route.navigateByUrl('pacientes/odontograma')
           }else{
             Notiflix.Notify.warning('Ocurrio un error, comuniquese con el administrador');
           }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PacientesComponent } from './pacientes/pacientes.component';
 import { CitasComponent } from './citas/citas.component';
 import { TratamientoComponent } from './tratamiento/tratamiento.component';
+import { OdontogramaComponent } from './odontograma/odontograma.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,9 @@ const routes: Routes = [
   },
   {
     path:'tratamiento',component:TratamientoComponent
+  },
+  {
+    path:'odontograma',component:OdontogramaComponent
   }
 ];
 
