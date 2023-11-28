@@ -10,8 +10,10 @@ import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TratamientoComponent } from './tratamiento/tratamiento.component';
 import { TratamientoPackageComponent } from './tratamiento/tratamiento-package/tratamiento-package.component';
-
-
+import {MatTabsModule} from '@angular/material/tabs'; 
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
+import { OdontogramaComponent } from './odontograma/odontograma.component'; 
 @NgModule({
   declarations: [
     PacientesComponent,
@@ -19,14 +21,18 @@ import { TratamientoPackageComponent } from './tratamiento/tratamiento-package/t
     CitasInsertUpdateComponent,
     PacientesInsertUpdateComponent,
     TratamientoComponent,
-    TratamientoPackageComponent
+    TratamientoPackageComponent,
+    OdontogramaComponent
   ],
   imports: [
     CommonModule,
     PacientesRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTabsModule,
+    MatCheckboxModule,
+    MatRadioModule
   ]
 })
 export class PacientesModule { }

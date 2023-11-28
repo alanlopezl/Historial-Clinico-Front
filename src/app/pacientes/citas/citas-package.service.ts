@@ -34,7 +34,6 @@ export class CitasPackageService {
     ID_PACIENTE: new FormControl('', Validators.required),
     ID_ESTADO_CITA: new FormControl('', Validators.required),
     MOTIVO: new FormControl('', Validators.required),
-    OBSERVACION: new FormControl('', Validators.required),
     FECHA_CITA: new FormControl('', Validators.required)
   });
 
@@ -44,7 +43,6 @@ export class CitasPackageService {
       ID_PACIENTE:null,
       ID_ESTADO_CITA:null,
       MOTIVO:null,
-      OBSERVACION:null,
       FECHA_CITA:null
     });
   }

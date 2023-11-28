@@ -17,6 +17,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatTabsModule} from '@angular/material/tabs'; 
 
 @NgModule({
   declarations: [FilterPipe],
@@ -36,7 +37,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatSelectModule,
     MatSlideToggleModule,
     MatDatepickerModule,
-    MatNativeDateModule,MatAutocompleteModule
+    MatNativeDateModule,MatAutocompleteModule,
+    MatTabsModule
 
      
   ],
