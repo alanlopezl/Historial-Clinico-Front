@@ -42,7 +42,7 @@ export class PacientesInsertUpdateComponent {
   guardar() {
 
     if (this._service.register.valid) {
-  
+      if (!this._service.register.get('COD_PERSONA')?.value){
         let datos = this._service.register.value;
         let params = {
           primern: datos.PRIMER_NOMBRE,
@@ -77,6 +77,42 @@ export class PacientesInsertUpdateComponent {
           this._service.mostrar();
         });
         this.cerrarmodal();
-    }
+      } 
+      else {
+        // actualiza ususario
+        let datos = this._service.register.value;
+  
+        let params = {
+          id: datos.COD_PERSONA,
+          primern: datos.PRIMER_NOMBRE,
+          segudon: datos.SEGUNDO_NOMBRE || '',
+          primera: datos.PRIMER_APELLIDO,
+          segundoa: datos.SEGUNDO_APELLIDO || '',
+          dni: datos.DNI,
+          nacimiento: datos.FEC_NACIMIENTO,
+          sexo: datos.SEXO,
+          idtipo:2
+        };
+       
+        this._service.actualizar(params).subscribe((resp: any) => {
+         // console.log(resp);
+          this._sweet.mensajeSimple(
+            'Actualizado correctamente',
+            'PACIENTE',
+            'success'
+          );
+          let params = {
+            operacion: 'ACTUALIZO',
+            fecha: new Date(),
+            idusuario: localStorage.getItem('user'),
+            tabla: 'Medico',
+          };
+          this._bitacora.crear(params).subscribe();
+  
+          this._service.mostrar();
+          this.cerrarmodal();
+        });
+      }
+    } 
   }
 }

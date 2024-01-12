@@ -53,7 +53,7 @@ export class UsuariosPackageService {
     this.nombre = data.PERSONA; 
     //this.register.get('ESTADO').enable();
     this.register.patchValue({
-      ID_USUARIO: data.ID_USUARIO,
+      ID_USUARIO: data.ID_USUARI,
       COD_PERSONA: data.COD_PERSONA,
       ID_ROL: data.ID_ROL,
       USUARIO: data.USUARIO,

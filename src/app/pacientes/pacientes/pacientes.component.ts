@@ -70,6 +70,16 @@ export class PacientesComponent {
     this._dialog.open(PacientesInsertUpdateComponent);
     this._service.inicializarForm();
   }
+  
+  editar(item: any) {
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '60%';
+    this._dialog.open(PacientesInsertUpdateComponent);
+    this._service.popForm(item);
+  }
 
 
   eliminar(id: number) {

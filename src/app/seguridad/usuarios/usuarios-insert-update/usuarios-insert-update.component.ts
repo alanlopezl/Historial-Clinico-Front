@@ -104,7 +104,7 @@ export class UsuariosInsertUpdateComponent implements OnInit {
               this._bitacora.crear(params).subscribe();
               this._service.mostrar();
             }
-          })
+          });
 
           this.cerrarmodal();
         } else {
