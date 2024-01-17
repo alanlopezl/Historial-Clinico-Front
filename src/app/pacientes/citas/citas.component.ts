@@ -115,7 +115,7 @@ export class CitasComponent {
               console.log(resp);
               this._sweet.mensajeSimple(
                 'No se puede eliminar',
-                'Pacientes',
+                'CITA',
                 'error'
               );
             } else {
@@ -123,12 +123,12 @@ export class CitasComponent {
                 operacion: 'ELIMINO',
                 fecha: new Date(),
                 idusuario: localStorage.getItem('user'),
-                tabla: 'PACIENTES',
+                tabla: 'CITAS',
               };
               this._bitacora.crear(params).subscribe();
               this._sweet.mensajeSimple(
                 'Eliminado correctamente',
-                'PACIENTES',
+                'CITA',
                 'success'
               );
             }

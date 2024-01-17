@@ -40,10 +40,12 @@ export class PacientesInsertUpdateComponent {
   }
 
   guardar() {
-
+    console.log('Guardando paciente...');
     if (this._service.register.valid) {
       if (!this._service.register.get('COD_PERSONA')?.value){
         let datos = this._service.register.value;
+        
+
         let params = {
           primern: datos.PRIMER_NOMBRE,
           segudon: datos.SEGUNDO_NOMBRE || '',
@@ -57,9 +59,20 @@ export class PacientesInsertUpdateComponent {
         };
 
         this._service.crear(params).subscribe((resp) => {
-          console.log(resp);
+        
           if (!resp.ok) {
+            
             this._sweet.mensajeSimple(resp.msg, 'PACIENTE', 'warning');
+         /* } else {
+            const mensaje: string = resp.data.sqlMessage;
+            const patron: RegExp = /key '(\w+)'/;
+            const resultado: RegExpMatchArray | null = mensaje.match(patron);
+
+            if (resultado) {
+              const valorDerecha: string = resultado[1];
+              this._sweet.mensajeSimple(`${valorDerecha} ya está en uso`, 'PERSONAS', 'warning');
+            }
+          }*/
           } else {
             this._sweet.mensajeSimple(
               'Creado correctamente',
@@ -78,8 +91,10 @@ export class PacientesInsertUpdateComponent {
         });
         this.cerrarmodal();
       } 
-      else {
-        // actualiza ususario
+
+
+    }else {
+        // actualiza paciente
         let datos = this._service.register.value;
   
         let params = {
@@ -115,4 +130,4 @@ export class PacientesInsertUpdateComponent {
       }
     } 
   }
-}
+

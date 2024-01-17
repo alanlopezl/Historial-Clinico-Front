@@ -115,7 +115,10 @@
                                                 routerLink="/pacientes/tratamiento"  [queryParams]="item">
                                                 <mat-icon>medication</mat-icon>
                                             </button>
-
+                                            <button *ngIf="permisos?.ELIMINAR == 'SI'" mat-mini-fab color="warn"  (click)="eliminar(item.ID_CITA)" >
+                                                <mat-icon>delete_forever</mat-icon>
+                                            </button>
+                                       
                                            
                                         </div>
                                     </td>
