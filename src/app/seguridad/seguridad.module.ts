@@ -19,10 +19,11 @@ import { ParametrosInsertUpdateComponent } from './parametros/parametros-insert-
 import { PersonaComponent } from './usuarios/persona/persona.component';
 import { EstadosComponent } from './estados/estados.component';
 import { InsertUpdateEstadoComponent } from './estados/insert-update-estado/insert-update-estado.component';
+import { BackupComponent } from './backup/backup.component';
 
 @NgModule({
   declarations: [UsuariosComponent, UsuariosInsertUpdateComponent,
-     PermisosComponent, PermisosInsertUpdateComponent, ObjetosComponent, ObjetosInsertUpdateComponent, RolesComponent, RolesInsertUpdateComponent, BitacoraComponent, PreguntasComponent, PreguntasInsertUpdateComponent, ParametrosComponent, ParametrosInsertUpdateComponent, PersonaComponent, EstadosComponent, InsertUpdateEstadoComponent],
+     PermisosComponent, BackupComponent, PermisosInsertUpdateComponent, ObjetosComponent, ObjetosInsertUpdateComponent, RolesComponent, RolesInsertUpdateComponent, BitacoraComponent, PreguntasComponent, PreguntasInsertUpdateComponent, ParametrosComponent, ParametrosInsertUpdateComponent, PersonaComponent, EstadosComponent, InsertUpdateEstadoComponent],
   imports: [
     CommonModule,
     SeguridadRoutingModule,

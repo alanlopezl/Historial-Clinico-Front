@@ -55,6 +55,7 @@ export class EspecialidadPackageService {
 
   mostrarid(id: number){
     const request$ = this._globals.obtener('especialidad/'+id).pipe(tap((resp:any)=>{
+      console.log(resp)
      this.especialidadid.next(resp)
    }));
     return request$.subscribe();
@@ -83,4 +84,9 @@ export class EspecialidadPackageService {
   eliminar(id:any):Observable<any>{
      return this._http.delete(this.url+'/'+id);
   }
+
+  eliminarFromMedic(id:any):Observable<any>{
+    console.log(id)
+    return this._http.delete(this.url+'/medico/'+id);
+ }
 }

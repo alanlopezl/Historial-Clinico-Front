@@ -18,6 +18,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTabsModule} from '@angular/material/tabs'; 
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [FilterPipe],
@@ -38,8 +40,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatSlideToggleModule,
     MatDatepickerModule,
     MatNativeDateModule,MatAutocompleteModule,
-    MatTabsModule
-
+    MatTabsModule,
+    MatMenuModule
      
   ],
   exports: [
@@ -59,7 +61,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatSlideToggleModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatProgressBarModule,
+    MatMenuModule
   ]
 })
 export class MaterialModule { }

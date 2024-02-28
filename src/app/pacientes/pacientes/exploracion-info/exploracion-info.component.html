@@ -1,0 +1,42 @@
+<div>
+    <div class="col-lg-6">
+        <nav aria-label="breadcrumb">
+            <h1><strong class="text">Exploracion del paciente</strong></h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
+                <li class="breadcrumb-item active"><a>Exploracion del paciente</a></li>
+            </ol>
+        </nav>
+    </div>
+    <mat-card>
+        <mat-card-content>
+            <h2 class="text-center"><strong>Exploracion del paciente</strong></h2>
+            <h4 class="text-center"><strong>Fecha:</strong> {{fecha | date:'d/M/yy'}}</h4>
+            <div class="row">
+                <div class="col-lg-4">
+                    <h4><strong>Nombre paciente: </strong>{{pacienteService.selectedNamePaciente}}</h4>
+                </div>
+
+            </div>
+
+            <!-- <mat-tab-group>
+                <mat-tab label="Informacion"> -->
+            <br>
+            <h3><strong>Cuestionario:</strong></h3>
+            <div class="row container-fluid">
+                <div class="col-lg-6 mb-2" *ngFor="let item of cuestionarios">
+                    <h4 class="p-0 m-0">{{item.NOMBRE}}</h4>
+                    <b><span class="p-0 m-0">   Respuesta: {{item.RESP == 1 ? 'SI' : 'NO'}}</span></b>
+                </div>
+            </div>
+            <br>
+            <h3><strong>Enfermedades que el paciente reporta:</strong></h3>
+            <div class="container-fluid">
+                <div class="" *ngFor="let item of enfermedades">
+                    <h4 class="p-0 m-0">{{item.NOMBRE}}</h4>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+</div>

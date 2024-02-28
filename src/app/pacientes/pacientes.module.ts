@@ -13,7 +13,8 @@ import { TratamientoPackageComponent } from './tratamiento/tratamiento-package/t
 import {MatTabsModule} from '@angular/material/tabs'; 
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
-import { OdontogramaComponent } from './odontograma/odontograma.component'; 
+import { OdontogramaComponent } from './odontograma/odontograma.component';
+import { ExploracionInfoComponent } from './pacientes/exploracion-info/exploracion-info.component'; 
 @NgModule({
   declarations: [
     PacientesComponent,
@@ -22,7 +23,8 @@ import { OdontogramaComponent } from './odontograma/odontograma.component';
     PacientesInsertUpdateComponent,
     TratamientoComponent,
     TratamientoPackageComponent,
-    OdontogramaComponent
+    OdontogramaComponent,
+    ExploracionInfoComponent
   ],
   imports: [
     CommonModule,

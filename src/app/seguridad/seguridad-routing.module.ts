@@ -8,6 +8,8 @@ import { PreguntasComponent } from './preguntas/preguntas.component';
 import { RolesComponent } from './roles/roles.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { EstadosComponent } from './estados/estados.component';
+import { BackupComponent } from './backup/backup.component';
+import { RestoreComponent } from './restore/restore.component';
 
 const routes: Routes = [
   {
@@ -33,7 +35,13 @@ const routes: Routes = [
   },
  {
     path: 'estados',component: EstadosComponent,
-  }
+  },
+  {
+    path: 'backup',component: BackupComponent,
+  },
+  {
+    path: 'restore',component: RestoreComponent,
+  },
 ];
 
 @NgModule({

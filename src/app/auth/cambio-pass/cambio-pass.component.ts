@@ -33,7 +33,7 @@ export class CambioPassComponent implements OnInit {
       if(this.cambioForm.value.contra == this.cambioForm.value.repitecontra){
         let params = {
           pass:this.cambioForm.value.contra,
-          id:JSON.parse(localStorage.getItem('user'))
+          id: this._service.idUsuario
         }
         this._service.cambiopass(params).subscribe(resp=>{
         this._sweet.mensajeSimple('Contraseña actualizada correctamente','Cambio','success');

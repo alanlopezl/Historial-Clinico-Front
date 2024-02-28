@@ -7,6 +7,7 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import * as XLSX from 'xlsx';
 import { PacientesPackageService } from './pacientes-package.service';
 import { PacientesInsertUpdateComponent } from './pacientes-insert-update/pacientes-insert-update.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pacientes',
@@ -39,7 +40,8 @@ export class PacientesComponent {
     private _dialog: MatDialog,
     private _bitacora: GlobalService,
     private _sweet: SweetAlertService,
-    private paginator: MatPaginatorIntl
+    private paginator: MatPaginatorIntl,
+    private router: Router,
   ) {
     paginator.itemsPerPageLabel = 'Cantidad por página';
     this._service.mostrar(this.buscar);
@@ -53,6 +55,27 @@ export class PacientesComponent {
 
   busqueda() {
     this._service.mostrar(this.buscar);
+  }
+
+  selectPaciente(paciente) {
+    this._service.selectedIdPaciente = paciente.COD_PERSONA;
+    this._service.selectedNamePaciente = `${paciente.PRIMER_NOMBRE} ${paciente.PRIMER_APELLIDO}`
+    
+    this.router.navigateByUrl('/pacientes/tratamiento');
+  }
+
+  goOdontograma(paciente) {
+    this._service.selectedIdPaciente = paciente.COD_PERSONA;
+    this._service.selectedNamePaciente = `${paciente.PRIMER_NOMBRE} ${paciente.PRIMER_APELLIDO}`
+    
+    this.router.navigateByUrl('/pacientes/odontograma');
+  }
+
+  selectPacienteInfo(paciente) {
+    this._service.selectedIdPaciente = paciente.COD_PERSONA;
+    this._service.selectedNamePaciente = `${paciente.PRIMER_NOMBRE} ${paciente.PRIMER_APELLIDO}`
+    
+    this.router.navigateByUrl('/pacientes/tratamiento/info');
   }
 
   ngOnDestroy(): void {}

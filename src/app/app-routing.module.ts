@@ -11,12 +11,13 @@ import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './guard/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { CorreoGuard } from './guard/correo.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'inicio', component: LoginComponent },
     { path: 'preguntas', component: PreguntasSeguridadComponent },
-   { path: 'contraseña', component: CambioPassComponent },
+   { path: 'contraseña/:token', component: CambioPassComponent, canActivate: [CorreoGuard] },
    { path: 'seleccion', component: RecuComponent },
    { path: 'recuperacion-preguntas', component: RecuPreguntasComponent },
    { path: 'recuperacion-correo', component: RecuCorreoComponent },

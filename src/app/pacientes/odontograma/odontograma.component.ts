@@ -1,4 +1,6 @@
 import { Component, SimpleChanges, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { PacientesPackageService } from '../pacientes/pacientes-package.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-odontograma',
@@ -13,13 +15,15 @@ export class OdontogramaComponent {
   @ViewChild(TemplateRef, { static: true }) odontoTemplate: TemplateRef<any>;
   @ViewChild(TemplateRef, { static: true, read: ViewContainerRef })
   odontoContainer: ViewContainerRef;
-  constructor() {}
+  constructor(public pacienteService: PacientesPackageService, private _route:Router,) {}
   ngOnChanges(changes: SimpleChanges): void {
     throw new Error("Method not implemented.");
   }
 
   ngOnInit(): void {
-   // this.mostrarCuest()
+    if(this.pacienteService.selectedIdPaciente === 0) {
+      this._route.navigateByUrl('/pacientes/pacientes');
+    }
   }
 
   ngAfterViewInit() {

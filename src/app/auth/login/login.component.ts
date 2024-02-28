@@ -20,7 +20,7 @@ export class LoginComponent {
 
     this.loginForm = new FormGroup({
       user: new FormControl('', [Validators.required]),
-      pass: new FormControl('', [Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/)]),
+      pass: new FormControl('', [Validators.required]),
     });
   }
 

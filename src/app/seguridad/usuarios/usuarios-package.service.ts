@@ -38,22 +38,25 @@ export class UsuariosPackageService {
   });
 
   inicializarForm() {
-    this.register.get('ESTADO').disable();
+    this.register.get('ID_ESTADO').disable();
+    this.register.get('USUARIO').enable();
     this.register.setValue({
       ID_USUARIO: null,
       COD_PERSONA: '',
       ID_ROL: '',
       USUARIO: '',
       EMAIL: '',
-      ID_ESTADO: '',
+      ID_ESTADO: 4,
     });
   }
 
   popForm(data: any) {
     this.nombre = data.PERSONA; 
-    //this.register.get('ESTADO').enable();
+    this.register.get('ID_ESTADO').enable();
+    this.register.get('USUARIO').disable();
+
     this.register.patchValue({
-      ID_USUARIO: data.ID_USUARI,
+      ID_USUARIO: data.ID_USUARIO,
       COD_PERSONA: data.COD_PERSONA,
       ID_ROL: data.ID_ROL,
       USUARIO: data.USUARIO,

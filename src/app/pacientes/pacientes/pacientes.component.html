@@ -8,7 +8,6 @@
             </ol>
         </nav>
     </div>
-
     <mat-card>
         <mat-card-content>
 
@@ -62,17 +61,12 @@
                                 <tr class="botonnegro text-center">
                                     <th class="thp" scope="col" role="columnheader">Id</th>
                                     <th class="thp" scope="col" role="columnheader">Nombre</th>
-                                    <th class="thp" scope="col" role="columnheader">DNI</th>
-                                    <th class="thp" scope="col" role="columnheader">Fecha Nacimiento</th>
+                                    <th class="thp" scope="col" role="columnheader">Teléfono</th>
+                                    <th class="thp" scope="col" role="columnheader">Correo</th>
+                                    <th class="thp" scope="col" role="columnheader">Edad</th>
                                     <th class="thp" scope="col" role="columnheader">Sexo</th>                                    
                                     <th *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d"
                                         class="thp" scope="col" role="columnheader">Opciones</th>
-                                    <!-- <th class="thp" scope="col" role="columnheader">Carnet Recidencia</th>
-                                    <th class="thp" scope="col" role="columnheader">Pasaporte</th>
-                                    <th class="thp" scope="col" role="columnheader">Permiso Operacion</th> -->
-
-                                    <!-- <th *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d"
-                                        class="thp" scope="col" role="columnheader">Opciones</th> -->
                                 </tr>
                                 
                             </thead>
@@ -83,8 +77,9 @@
                                     <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.PRIMER_NOMBRE}}
                                         {{item.PRIMER_APELLIDO}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.DNI}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.FEC_NACIMIENTO | date}}
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.TELEFONO}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.EMAIL}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.EDAD}}
                                     </td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.SEXO}}</td>
 
@@ -95,10 +90,30 @@
                                                 (click)="crear()">
                                                 <mat-icon>medication</mat-icon>
                                             </button> -->
+
+                                            <button mat-mini-fab class="yellowButton" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                                <mat-icon>how_to_reg</mat-icon>
+                                            </button>
+                                            <mat-menu #menu="matMenu">
+                                                <button mat-menu-item (click)="selectPacienteInfo(item)" aria-label="Example icon-button with a menu">
+                                                    <mat-icon>feed</mat-icon>
+                                                    <span>Ver exploración</span>
+                                                </button>
+                                                <button mat-menu-item (click)="selectPaciente(item)" aria-label="Example icon-button with a menu">
+                                                    <mat-icon>how_to_reg</mat-icon>
+                                                    <span>Llenar exploración</span>
+                                                </button>
+                                                <button mat-menu-item (click)="goOdontograma(item)" aria-label="Example icon-button with a menu">
+                                                    <mat-icon>design_services</mat-icon>
+                                                    <span>Odontograma</span>
+                                                </button>
+                                            </mat-menu>
+                                            
+
                                             <button  class="botonnegro" *ngIf="permisos?.ACTUALIZAR == 'SI'" mat-mini-fab  (click)="editar(item)" >
                                                 <mat-icon>create</mat-icon>
                                             </button>
-                                            
+
                                             
 
                                              <button *ngIf="permisos?.ELIMINAR == 'SI'" mat-mini-fab color="warn"  (click)="eliminar(item.COD_PERSONA)" >

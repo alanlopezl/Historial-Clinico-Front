@@ -1,0 +1,58 @@
+
+
+<div>
+    <div class="col-lg-6">
+        <nav aria-label="breadcrumb">
+            <h1><strong>RESPALDO</strong></h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Inicio</a></li>
+                <li class="breadcrumb-item active"><a >Respaldo</a></li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Nueva legalización</li> -->
+            </ol>
+        </nav>
+    </div>
+
+    <mat-card>
+        <mat-card-content>
+            <h3>Al presionar este botón se creará una copia de seguridad del sistema.</h3>
+            <div class="row justify-content-center">
+
+                <section class="col-12 justify-content-center d-flex">
+                    <button mat-raised-button  *ngIf="permisos?.INSERTAR == 'SI'" [class.spinner]="responseCargando$ | async"
+                        [disabled]="responseCargando$ | async" (click)="getBackup()" class="btn-p ">CREAR RESPALDO</button>
+                        
+                </section>
+                <div class="w-50 mt-2" *ngIf="generando">
+
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <br>
+    <mat-card>
+        <mat-card-content>
+            <h3>Al presionar este botón se restaurará el sistema.</h3>
+            <div class="row justify-content-center">
+                <div class="text-center">
+                    <mat-label>Subir respaldo: <span class="fw-bold">{{nombreRespaldo}}</span></mat-label>
+                </div>
+                <div class="botonFeo col-12 w-50">
+                    <input type="file" id="file" (change)="capturarFile($event)" accept=".sql">
+                    <label for="file" class="align-content-center example-edit-width d-flex align-items-center" >
+                        <mat-icon  class="align-self-center m-3">storage</mat-icon>
+                        Seleccionar archivo
+                    </label> 
+                </div>
+                <br class="col-12">
+                <section class="col-12 justify-content-center mt-2 d-flex" *ngIf="permisos?.ACTUALIZAR == 'SI'">
+                    <button mat-raised-button (click)="restaurar()"  class="btn-a" >RESTAURAR SISTEMA</button>
+                </section>
+                <div class="w-50 mt-2" *ngIf="restaurando">
+
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

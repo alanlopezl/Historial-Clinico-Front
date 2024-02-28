@@ -38,14 +38,10 @@ export class PacientesInsertUpdateComponent {
   get validateOpinion() {
     return this._service.register.controls;
   }
-
   guardar() {
-    console.log('Guardando paciente...');
     if (this._service.register.valid) {
-      if (!this._service.register.get('COD_PERSONA')?.value){
+      if (!this._service.register.get('COD_PERSONA')?.value) {
         let datos = this._service.register.value;
-        
-
         let params = {
           primern: datos.PRIMER_NOMBRE,
           segudon: datos.SEGUNDO_NOMBRE || '',
@@ -55,24 +51,21 @@ export class PacientesInsertUpdateComponent {
           nacimiento: datos.FEC_NACIMIENTO,
           estado: datos.EST_CIVIL,
           sexo: datos.SEXO,
-          tipo:2
+          tipo:2,
+          edad: datos.EDAD,
+          email: datos.EMAIL,
+          civil: datos.CIVIL,
+          ocupacion: datos.OCUPACION,
+          tel: datos.TEL,
+          cont_emer: datos.CONTACTO_EMERGENCIA,
+          emer_tel: datos.EMERGENCIA_TEL,
+          obs: datos.OBS,
+          dir: datos.DIRECCION
         };
 
         this._service.crear(params).subscribe((resp) => {
-        
           if (!resp.ok) {
-            
-            this._sweet.mensajeSimple(resp.msg, 'PACIENTE', 'warning');
-         /* } else {
-            const mensaje: string = resp.data.sqlMessage;
-            const patron: RegExp = /key '(\w+)'/;
-            const resultado: RegExpMatchArray | null = mensaje.match(patron);
-
-            if (resultado) {
-              const valorDerecha: string = resultado[1];
-              this._sweet.mensajeSimple(`${valorDerecha} ya está en uso`, 'PERSONAS', 'warning');
-            }
-          }*/
+            this._sweet.mensajeSimple(resp.msg, 'MEDICO', 'warning');
           } else {
             this._sweet.mensajeSimple(
               'Creado correctamente',
@@ -90,13 +83,10 @@ export class PacientesInsertUpdateComponent {
           this._service.mostrar();
         });
         this.cerrarmodal();
-      } 
-
-
-    }else {
-        // actualiza paciente
+      } else {
+        // actualiza ususario
         let datos = this._service.register.value;
-  
+
         let params = {
           id: datos.COD_PERSONA,
           primern: datos.PRIMER_NOMBRE,
@@ -105,12 +95,13 @@ export class PacientesInsertUpdateComponent {
           segundoa: datos.SEGUNDO_APELLIDO || '',
           dni: datos.DNI,
           nacimiento: datos.FEC_NACIMIENTO,
+          estado: datos.EST_CIVIL,
           sexo: datos.SEXO,
           idtipo:2
         };
        
         this._service.actualizar(params).subscribe((resp: any) => {
-         // console.log(resp);
+          console.log(resp);
           this._sweet.mensajeSimple(
             'Actualizado correctamente',
             'PACIENTE',
@@ -120,14 +111,15 @@ export class PacientesInsertUpdateComponent {
             operacion: 'ACTUALIZO',
             fecha: new Date(),
             idusuario: localStorage.getItem('user'),
-            tabla: 'Medico',
+            tabla: 'PACIENTE',
           };
           this._bitacora.crear(params).subscribe();
-  
+
           this._service.mostrar();
           this.cerrarmodal();
         });
       }
-    } 
+    }
+  }
   }
 

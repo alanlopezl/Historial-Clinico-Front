@@ -5,7 +5,7 @@
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Nombre</mat-label>
                 <input matInput placeholder="Ingrese nombre" formControlName="NOMBRE" 
-                onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+                onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || event.charCode == 32)"
                 onkeyup="javascript:this.value=this.value.toUpperCase();" oncopy="return false"
                 onpaste="return false" minlength="3" maxlength="20">
                 <mat-hint align="start" *ngIf="validateOpinion['NOMBRE'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>
@@ -14,7 +14,7 @@
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Descripcion</mat-label>
                 <input matInput placeholder="Ingrese descripcion" formControlName="DESCRIPCION" 
-                onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+                onkeypress="return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || event.charCode == 32)"
                 onkeyup="javascript:this.value=this.value.toUpperCase();" oncopy="return false"
                 onpaste="return false" minlength="3" maxlength="20">
                 <mat-hint align="start" *ngIf="validateOpinion['DESCRIPCION'].hasError('required')"><strong  class="text-danger" >Campo requerido!</strong> </mat-hint>

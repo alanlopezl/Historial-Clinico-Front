@@ -14,6 +14,10 @@ export class PacientesPackageService {
   private pacientes = new BehaviorSubject<any[]>([]);
   public response$: Observable<any[]> = this.pacientes.asObservable();
   
+  // Info del paciente
+  public selectedIdPaciente: number = 0;
+  public selectedNamePaciente: string = "";
+  
   private permiso = new BehaviorSubject<any[]>([]);
   public responsepermiso$: Observable<any[]> = this.permiso.asObservable();
 
@@ -33,6 +37,15 @@ export class PacientesPackageService {
     DNI: new FormControl('', Validators.required),
     FEC_NACIMIENTO: new FormControl('', Validators.required),
     SEXO: new FormControl('', Validators.required),
+    EDAD: new FormControl('', Validators.required),
+    EMAIL: new FormControl('', Validators.required),
+    CIVIL: new FormControl('', Validators.required),
+    OCUPACION: new FormControl('', Validators.required),
+    TEL: new FormControl('', Validators.required),
+    CONTACTO_EMERGENCIA: new FormControl('', Validators.required),
+    EMERGENCIA_TEL: new FormControl('', Validators.required),
+    DIRECCION: new FormControl('', Validators.required),
+    OBS: new FormControl(''),
   });
 
   inicializarForm(){
@@ -44,7 +57,16 @@ export class PacientesPackageService {
       SEGUNDO_APELLIDO:'',
       DNI:'',
       FEC_NACIMIENTO:'',
-      SEXO:''
+      SEXO:'',
+      EDAD: '',
+      EMAIL: '',
+      CIVIL: '',
+      OCUPACION: '',
+      TEL: '',
+      CONTACTO_EMERGENCIA: '',
+      EMERGENCIA_TEL: '',
+      OBS: '',
+      DIRECCION: ''
     })
   }
 
@@ -57,7 +79,16 @@ export class PacientesPackageService {
       SEGUNDO_APELLIDO:data.SEGUNDO_APELLIDO,
       DNI:data.DNI,
       FEC_NACIMIENTO:data.FEC_NACIMIENTO,
-      SEXO:data.SEXO
+      SEXO:data.SEXO,
+      EDAD: data.EDAD,
+      EMAIL: data.EMAIL,
+      CIVIL: data.EST_CIVIL,
+      OCUPACION: data.OCUPACION,
+      TEL: data.TELEFONO,
+      CONTACTO_EMERGENCIA: data.CONTACTO_EMERGENCIA,
+      EMERGENCIA_TEL: data.CONTACTO_EMER_TEL,
+      OBS: data.OBSERVACIONES,
+      DIRECCION: data.DIRECCION
      } )
 
      console.log(this.register.value);

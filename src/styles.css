@@ -13,6 +13,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 color: #efb810 !important;
 }
 
+.yellowButton {
+    background-color: #efb810 !important;
+color: #000000 !important;
+}
+
 .texto {
     color: #efb810 !important;
 }

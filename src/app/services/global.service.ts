@@ -1,14 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
+import { BehaviorSubject, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GlobalService {
-
+ 
+  usuario: string = "";
+  arregloSubject = new BehaviorSubject<any[]>([])
+  permisos = this.arregloSubject.asObservable()
+  rol: number = 0;
+  idUsuario: number = 0;
+  estado: string = "";
+  private baseURL: string = environment.url;
 
   constructor(private http: HttpClient) { }
 
@@ -29,10 +37,34 @@ export class GlobalService {
   crear(params: any): Observable<any> {
     return this.http.post(`${environment.url + "bitacora"}`, params).pipe(map((resp: any) => resp));
   }
+/*
 
   crearUserPers(params: any): Observable<any> {
-    return this.http.post(`${environment.url + "personauser"}`, params).pipe(map((resp: any) => resp));
-  }
+    return this.http.post(`${environment.url + "personauser"}`, params).pipe(catchError(err => of(err)));
+  }*/
+
+  
+
+// ...
+
+crearUserPers(params: any): Observable<any> {
+  return this.http.post(`${environment.url}personauser`, params).pipe(
+    catchError(error => {
+      if (error.status === 401 && error.error && error.error.message === 'Token no válido') {
+        // Manejar el error específico de token no válido
+        console.error('Error de token no válido:', error);
+        // Puedes redirigir al usuario a la página de inicio de sesión u tomar otras acciones
+      } else {
+        // Otros errores
+        console.error('Error en la solicitud:', error);
+      }
+      // Devuelve un observable de algún valor predeterminado o lanza el error nuevamente
+      return of({ ok: false, message: 'Hubo un problema en la solicitud.' });
+    })
+  );
+}
+
+
 
   mostrarpermisos(): Observable<any> {
     let id = localStorage.getItem('rol');
@@ -64,6 +96,20 @@ export class GlobalService {
    return this.http.put(`${environment.url+ 'personaperfil'}`,params).pipe(map((resp:any)=>resp));
 
     
+  }
+
+  revalidarTokenCorreo(token: string) {
+
+    const url: string = `${this.baseURL}recuperacion-correo/${token}`;
+    return this.http.get( url )
+      .pipe(
+        tap((resp: any)=> {
+          if( resp.ok === true ) {
+            this.idUsuario = resp.id_usuario;
+          }
+        }),
+        catchError( err => of(err.error) )
+    )
   }
 
 }

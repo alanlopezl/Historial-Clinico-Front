@@ -1,0 +1,148 @@
+
+
+img.back{
+    width: 30%;
+    height: auto;
+    /*padding-top: 3%;
+    
+    /*align-content: center;*/
+}
+
+p.centrado{
+    text-align: center;
+}
+
+.spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    border-top-color: #000000;
+    animation: spinner .8s linear infinite;
+  }
+
+  
+label {
+    color: rgb(12, 5, 5);
+}
+
+thead, th, td {
+    text-align: center;
+}
+
+.mat-card-actions{
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    flex-direction: column;
+}
+
+.card-header{
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.card-footer{
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    flex-direction: column;
+}
+
+.btn-p {
+    border-radius: 10px;
+    color: #efb810 !important; /* Texto dorado */
+    background-color: #000000 !important; /* Fondo negro */    
+    font-size: 1rem;
+    font-weight: 400;
+    min-height: 3.125rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease all;
+}
+
+
+.btn-p:hover {
+
+    background-color: #110b0a ;
+    border: 0;
+
+}
+
+.btn-a {
+
+    color: #efb810 !important; /* Texto dorado */
+    background-color: #000000 !important; /* Fondo negro */  
+    font-size: 1rem;
+    font-weight: 400;
+    min-height: 3.125rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease all;
+    border-radius: 10px;
+    line-height: 50px;
+}
+
+.btn-a:hover {
+
+    background-color: #0b0707 ;
+    border: 0;
+
+}
+
+h3 {
+    text-align: center;
+    padding: 15px;
+    font-weight: normal;
+}
+
+input[type = "file" ]{
+    display: none;
+}
+
+label{
+    color: #cdd356;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #11100c;
+    font-size: 20px;
+/*     position: absolute;
+    margin: auto;
+    
+    font-size: 20px;
+    display: flex;
+    justify-content: center; */
+}
+
+.botonFeo {
+    line-height: 50px;
+}
+
+.example-full-width {
+    width: 100%;
+    color: #efb810;
+}
+
+.example-edit-width {
+    width: 100%;
+    color: #efb810;
+}
+
+.inline-buttons {
+    display: inline-flex;
+    justify-content: center;
+}
+
+.form-control{
+    background-color: #202428;
+    color: #efb810;
+    border: none;
+}

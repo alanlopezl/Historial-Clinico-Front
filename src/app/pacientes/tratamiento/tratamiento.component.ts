@@ -4,6 +4,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import * as Notiflix from 'notiflix';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { environment } from 'src/environments/environment.prod';
+import { PacientesPackageService } from '../pacientes/pacientes-package.service';
 
 @Component({
   selector: 'app-tratamiento',
@@ -22,7 +23,8 @@ export class TratamientoComponent {
     private http: HttpClient,
     private query: ActivatedRoute,
     private _swwet: SweetAlertService,
-    private _route:Router
+    private _route:Router,
+    public pacienteService: PacientesPackageService
   ) {
     this.query.queryParams.subscribe((r) => {
       this.data = r;
@@ -30,40 +32,74 @@ export class TratamientoComponent {
   }
 
   ngOnInit(): void {
-    this.mostrarCuest();
-    this.mostrarEnfer();
+    if(this.pacienteService.selectedIdPaciente === 0) {
+      this._route.navigateByUrl('/pacientes/pacientes');
+    } else {
+      this.mostrarCuest();
+      this.mostrarEnfer();
+      this.getAnswers();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.pacienteService.selectedIdPaciente = 0;
+    this.pacienteService.selectedNamePaciente = "";
   }
 
   toco(value: number, id: number) {
-    this.cuestionario.push({ id, value, paciente: this.data.ID_PACIENTE });
+    this.cuestionario.push({ id, value, paciente: this.pacienteService.selectedIdPaciente });
     this.cuestionario = this.cuestionario.filter((r) => r.id != id);
-    this.cuestionario.push({ id, value, paciente: this.data.ID_PACIENTE });
+    this.cuestionario.push({ id, value, paciente: this.pacienteService.selectedIdPaciente });
   }
 
   tocoe(value: number, id: number) {
-    this.enfermedades.push({ id, value, paciente: this.data.ID_PACIENTE });
-    this.enfermedades = this.enfermedades.filter((r) => r.id != id);
-    this.enfermedades.push({ id, value, paciente: this.data.ID_PACIENTE });
+    // Busca si el elemento ya existe en el arreglo
+    let index = this.enfermedades.findIndex((r) => r.id === id);
+    console.log(index)
+    console.log(value)
+    // Si el elemento existe y el checkbox se desmarca, lo elimina
+    if (index !== -1) {
+      this.enfermedades.splice(index, 1);
+    }
+    // Si el elemento no existe y el checkbox se marca, lo agrega
+    else if (index === -1) {
+      this.enfermedades.push({ id, value, paciente: this.pacienteService.selectedIdPaciente });
+    }
   }
 
   guardarCuest() {
-    Notiflix.Confirm.show('Guardar', 'Desea guardar', 'Si', 'No', () => {
-      let params = {
-        cuest: this.cuestionario,
-        enfer: this.enfermedades,
-      };
-      this.http
-        .post(environment.url + 'cuestionario', params)
-        .subscribe((resp:any) => {
+    if(this.cuestionario.length >= this.cuestio.length) {
+      Notiflix.Confirm.show('Guardar', 'Desea guardar', 'Si', 'No', () => {
+        let params = {
+          idPaciente: this.pacienteService.selectedIdPaciente,
+          cuest: this.cuestionario,
+          enfer: this.enfermedades,
+        };
+        
+        this.http
+          .post(environment.url + 'cuestionario', params)
+          .subscribe((resp:any) => {
+  
+            if(resp.ok){
+             Notiflix.Notify.success('Guardado correctamente');
+             this._route.navigateByUrl('pacientes/pacientes')
+            }else{
+              Notiflix.Notify.warning('Ocurrio un error, comuniquese con el administrador');
+            }
+            console.log(resp);
+          });
+      });
+    } else {
+      this._swwet.mensajeSimple('Debe responder todo el cuestionario', 'PACIENTE', 'info');
+    }
+  }
 
-          if(resp.ok){
-           Notiflix.Notify.success('Guardado correctamente');
-           this._route.navigateByUrl('pacientes/odontograma')
-          }else{
-            Notiflix.Notify.warning('Ocurrio un error, comuniquese con el administrador');
-          }
+  getAnswers() {
+    let idUsuario = this.pacienteService.selectedIdPaciente;
+    this.http
+        .get(environment.url + 'getAnswers/' + idUsuario)
+        .subscribe((resp:any) => {
           console.log(resp);
-        });
     });
   }
 

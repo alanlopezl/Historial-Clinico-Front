@@ -4,6 +4,7 @@ import { PacientesComponent } from './pacientes/pacientes.component';
 import { CitasComponent } from './citas/citas.component';
 import { TratamientoComponent } from './tratamiento/tratamiento.component';
 import { OdontogramaComponent } from './odontograma/odontograma.component';
+import { ExploracionInfoComponent } from './pacientes/exploracion-info/exploracion-info.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,9 @@ const routes: Routes = [
   },
   {
     path:'tratamiento',component:TratamientoComponent
+  },
+  {
+    path:'tratamiento/info',component:ExploracionInfoComponent
   },
   {
     path:'odontograma',component:OdontogramaComponent

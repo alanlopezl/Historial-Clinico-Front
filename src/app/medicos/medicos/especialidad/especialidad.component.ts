@@ -114,7 +114,7 @@ export class EspecialidadComponent {
       .then((result) => {
         console.log(result);
         if (result) {
-          this._service.eliminar(id).subscribe((resp) => {
+          this._service.eliminarFromMedic(id).subscribe((resp) => {
             this._service.mostrar(this.buscar);
             if (!resp.ok) {
               console.log(resp);
@@ -136,6 +136,7 @@ export class EspecialidadComponent {
                 'ESPECIALIDAD',
                 'success'
               );
+              this._service.mostrarid(this.id);
             }
           });
         }

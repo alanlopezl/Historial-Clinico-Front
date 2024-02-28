@@ -46,13 +46,18 @@ export class UsuariosInsertUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  
+    
   }
 
   //limpia modal
   clear() {
     this._service.register.reset();
     this._service.inicializarForm();
+  }
+
+  ngOnDestroy(): void {
+    this._service.nombre = "";
+    this._service.register.reset();
   }
 
   //cerrarmodal
@@ -88,7 +93,16 @@ export class UsuariosInsertUpdateComponent implements OnInit {
 
           this._service.crear(params).subscribe((resp) => {
             if (!resp.ok) {
-              this._sweet.mensajeSimple(resp.msg, 'USUARIOS', 'warning');
+              console.log(resp)
+              console.log(resp.data.sqlMessage)
+              console.log(resp.data.errno == 1062)
+              console.log(resp.data.sqlMessage.includes('EMAIL'))
+              if(resp.data.errno == 1062 && resp.data.sqlMessage.includes('EMAIL')) {
+                this._sweet.mensajeSimple('Correo duplicado', 'USUARIOS', 'warning');
+              } else {
+                this._sweet.mensajeSimple(resp.msg, 'USUARIOS', 'warning');
+
+              }
             } else {
               this._sweet.mensajeSimple(
                 'Creado correctamente',
