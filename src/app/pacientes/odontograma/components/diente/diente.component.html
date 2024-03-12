@@ -1,0 +1,24 @@
+<div class="text-center">
+    <div class="d-flex justify-content-center">
+        <div style="width: 10px;"></div>
+        <h4 class="pb-0 mb-0 fw-bold">{{numeroDiente}}</h4>
+    </div>
+    <div class="d-flex justify-content-center">
+        <svg height="50" width="50" id="p19" #p19>
+            <polygon points="10,10 50,10 40,20 20,20" fill="white" stroke="black" (click)="selectLado(numeroDiente+'1')"
+               data-bs-toggle="modal" data-bs-target="#exampleModal" [id]="numeroDiente+'1'"  />
+            <polygon points="50,10 50,50 40,40 40,20" fill="white" stroke="black" (click)="selectLado(numeroDiente+'2')"
+               data-bs-toggle="modal" data-bs-target="#exampleModal" [id]="numeroDiente+'2'"  />
+            <polygon points="50,50 10,50 20,40 40,40" fill="white" stroke="black" (click)="selectLado(numeroDiente+'3')"
+               data-bs-toggle="modal" data-bs-target="#exampleModal" [id]="numeroDiente+'3'"  />
+            <polygon points="10,50 20,40 20,20 10,10" fill="white" stroke="black" (click)="selectLado(numeroDiente+'4')"
+               data-bs-toggle="modal" data-bs-target="#exampleModal" [id]="numeroDiente+'4'"  />
+            <polygon points="20,20 40,20 40,40 20,40" fill="white" stroke="black" (click)="selectLado(numeroDiente+'5')"
+               data-bs-toggle="modal" data-bs-target="#exampleModal" [id]="numeroDiente+'5'"  />
+        </svg>
+
+    </div>
+
+</div>
+
+<app-modal (onSubmit)="changeColor(odontologiaService.idDienteSeleccionado, $event)"></app-modal>

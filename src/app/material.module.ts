@@ -20,6 +20,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTabsModule} from '@angular/material/tabs'; 
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [FilterPipe],
@@ -41,8 +42,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatDatepickerModule,
     MatNativeDateModule,MatAutocompleteModule,
     MatTabsModule,
-    MatMenuModule
-     
+    MatMenuModule,
+    MatButtonToggleModule
   ],
   exports: [
     FilterPipe,
@@ -63,7 +64,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatNativeDateModule,
     MatAutocompleteModule,
     MatProgressBarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatButtonToggleModule
   ]
 })
 export class MaterialModule { }

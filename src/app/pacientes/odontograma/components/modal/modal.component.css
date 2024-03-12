@@ -1,0 +1,9 @@
+.mat-button-toggle-group {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .mat-button-toggle {
+    border: 0.5px solid #E0E0E0;
+    flex-basis: 25%; /* Ajusta este valor según tus necesidades */
+  }

@@ -14,7 +14,9 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import { OdontogramaComponent } from './odontograma/odontograma.component';
-import { ExploracionInfoComponent } from './pacientes/exploracion-info/exploracion-info.component'; 
+import { ExploracionInfoComponent } from './pacientes/exploracion-info/exploracion-info.component';
+import { DienteComponent } from './odontograma/components/diente/diente.component';
+import { ModalComponent } from './odontograma/components/modal/modal.component'; 
 @NgModule({
   declarations: [
     PacientesComponent,
@@ -24,7 +26,9 @@ import { ExploracionInfoComponent } from './pacientes/exploracion-info/exploraci
     TratamientoComponent,
     TratamientoPackageComponent,
     OdontogramaComponent,
-    ExploracionInfoComponent
+    ExploracionInfoComponent,
+    DienteComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
