@@ -1,5 +1,6 @@
 import { Component, Input, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { OdontogramaService } from '../../services/odontograma.service';
+import { PacientesPackageService } from 'src/app/pacientes/pacientes/pacientes-package.service';
 
 @Component({
   selector: 'app-diente',
@@ -10,9 +11,88 @@ export class DienteComponent {
 
   @Input() numeroDiente: string;
 
-  constructor(public odontologiaService: OdontogramaService) {}
+  constructor(public odontologiaService: OdontogramaService, public pacienteService: PacientesPackageService) {}
 
   dienteCompleto: boolean = false;
+
+  historial = [];
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.odontologiaService.odontograma$.subscribe(odontograma => {
+      odontograma.forEach((diente) => {
+        if(diente.INDICE_DIENTE == this.numeroDiente) {
+          switch (diente.LADO_DIENTE) {
+            case `Arriba`:
+              this.ladoDiente[0].observacion = diente.OBSERVACION
+              this.ladoDiente[0].observacion = diente.ID_TRATAMIENTO
+              this.ladoDiente[0].observacion = diente.ID_ESTADO
+              this.ladoDiente[0].estado = {
+                COLOR: diente.COLOR,
+                COMPLETO: diente.COMPLETO,
+                ID_ESTADO: diente.ID_ESTADO,
+                NOMBRE: diente.NOMBRE
+              }
+              this.changeColor(this.numeroDiente+'1', this.ladoDiente[0])
+              break;
+            case `Derecha`:
+              this.ladoDiente[1].observacion = diente.OBSERVACION
+              this.ladoDiente[1].observacion = diente.ID_TRATAMIENTO
+              this.ladoDiente[1].observacion = diente.ID_ESTADO
+              this.ladoDiente[1].estado = {
+                COLOR: diente.COLOR,
+                COMPLETO: diente.COMPLETO,
+                ID_ESTADO: diente.ID_ESTADO,
+                NOMBRE: diente.NOMBRE
+              }
+              this.changeColor(this.numeroDiente+'2', this.ladoDiente[1])
+              break;
+            case `Abajo`:
+              this.ladoDiente[2].observacion = diente.OBSERVACION
+              this.ladoDiente[2].observacion = diente.ID_TRATAMIENTO
+              this.ladoDiente[2].observacion = diente.ID_ESTADO
+              this.ladoDiente[2].estado = {
+                COLOR: diente.COLOR,
+                COMPLETO: diente.COMPLETO,
+                ID_ESTADO: diente.ID_ESTADO,
+                NOMBRE: diente.NOMBRE
+              }
+              this.changeColor(this.numeroDiente+'3', this.ladoDiente[2])
+              break;
+            case `Izquierda`:
+              this.ladoDiente[3].observacion = diente.OBSERVACION
+              this.ladoDiente[3].observacion = diente.ID_TRATAMIENTO
+              this.ladoDiente[3].observacion = diente.ID_ESTADO
+              this.ladoDiente[3].estado = {
+                COLOR: diente.COLOR,
+                COMPLETO: diente.COMPLETO,
+                ID_ESTADO: diente.ID_ESTADO,
+                NOMBRE: diente.NOMBRE
+              }
+              this.changeColor(this.numeroDiente+'4', this.ladoDiente[3])
+              break;
+            case `Centro`:
+              this.ladoDiente[4].observacion = diente.OBSERVACION
+              this.ladoDiente[4].observacion = diente.ID_TRATAMIENTO
+              this.ladoDiente[4].observacion = diente.ID_ESTADO
+              this.ladoDiente[4].estado = {
+                COLOR: diente.COLOR,
+                COMPLETO: diente.COMPLETO,
+                ID_ESTADO: diente.ID_ESTADO,
+                NOMBRE: diente.NOMBRE
+              }
+              this.changeColor(this.numeroDiente+'5', this.ladoDiente[4])
+              break;
+          
+            default:
+              break;
+          }
+        }
+      })
+    })
+    
+  }
 
   ladoDiente: LadoDiente[] = [
     {lado: 0, estado: '', observacion: '', tratamiento: 0},
@@ -54,17 +134,15 @@ export class DienteComponent {
       default:
         break;
     }
+    this.cargarHistorial()
   }
 
   changeColor(id: string, color: any) {
-    console.log(id)
-    console.log(color)
     const lado: HTMLElement | null = document.getElementById(id);
     if(color.estado.COMPLETO) {
       this.dienteCompleto = true;
       for (let index = 1; index <= 5; index++) {
         let newId = id.slice(0, -1) + index;
-        console.log(newId)
         const lado: HTMLElement | null = document.getElementById(newId);
         lado.attributes.setNamedItem(
           lado.attributes.getNamedItem("fill")
@@ -74,7 +152,6 @@ export class DienteComponent {
       if(this.dienteCompleto) {
         for (let index = 1; index <= 5; index++) {
           let newId = id.slice(0, -1) + index;
-          console.log(newId)
           const lado: HTMLElement | null = document.getElementById(newId);
           lado.attributes.setNamedItem(
             lado.attributes.getNamedItem("fill")
@@ -93,7 +170,13 @@ export class DienteComponent {
         diente.tratamiento = color.tratamiento
       }
     })
-    console.log(this.ladoDiente);
+  }
+
+  cargarHistorial() {
+    const idPaciente = this.pacienteService.selectedIdPaciente;
+    const ladoSeleccionado = this.odontologiaService.ladoSeleccionadoNombre;
+    this.odontologiaService.getHistorialDiente(idPaciente, ladoSeleccionado, this.numeroDiente)
+      .subscribe();
   }
 
 }
