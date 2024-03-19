@@ -16,7 +16,9 @@ import {MatRadioModule} from '@angular/material/radio';
 import { OdontogramaComponent } from './odontograma/odontograma.component';
 import { ExploracionInfoComponent } from './pacientes/exploracion-info/exploracion-info.component';
 import { DienteComponent } from './odontograma/components/diente/diente.component';
-import { ModalComponent } from './odontograma/components/modal/modal.component'; 
+import { ModalComponent } from './odontograma/components/modal/modal.component';
+import { ModalHistorialDienteComponent } from './odontograma/components/modal-historial-diente/modal-historial-diente.component';
+import { ModalPresupuestoComponent } from './odontograma/components/modal-presupuesto/modal-presupuesto.component'; 
 @NgModule({
   declarations: [
     PacientesComponent,
@@ -28,7 +30,9 @@ import { ModalComponent } from './odontograma/components/modal/modal.component';
     OdontogramaComponent,
     ExploracionInfoComponent,
     DienteComponent,
-    ModalComponent
+    ModalComponent,
+    ModalHistorialDienteComponent,
+    ModalPresupuestoComponent
   ],
   imports: [
     CommonModule,

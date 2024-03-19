@@ -92,7 +92,7 @@
 
             <div class="row d-flex justify-content-end">
                 <div class="col-lg-2">
-                    <button class="btn btn-primary" (click)="guardarOdonto()">Generar presupuesto</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPresupuesto" (click)="cargarPresupuesto()">Generar presupuesto</button>
                 </div>
             </div>
 
@@ -100,3 +100,5 @@
     </mat-card>
 
 </div>
+
+<app-modal-presupuesto [presupuesto]="presupuesto" [total]="total"></app-modal-presupuesto>

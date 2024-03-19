@@ -1,6 +1,7 @@
 import { Component, SimpleChanges, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { PacientesPackageService } from '../pacientes/pacientes-package.service';
 import { Router } from '@angular/router';
+import { OdontogramaService } from './services/odontograma.service';
 
 @Component({
   selector: 'app-odontograma',
@@ -12,10 +13,14 @@ export class OdontogramaComponent {
   fill;
   htmlString: string;
   nativo: any;
+
+  total: number = 0;
+  presupuesto = [];
+
   @ViewChild(TemplateRef, { static: true }) odontoTemplate: TemplateRef<any>;
   @ViewChild(TemplateRef, { static: true, read: ViewContainerRef })
   odontoContainer: ViewContainerRef;
-  constructor(public pacienteService: PacientesPackageService, private _route:Router,) {}
+  constructor(public pacienteService: PacientesPackageService, private _route:Router, public odontologiaService: OdontogramaService, ) {}
   ngOnChanges(changes: SimpleChanges): void {
     throw new Error("Method not implemented.");
   }
@@ -23,6 +28,10 @@ export class OdontogramaComponent {
   ngOnInit(): void {
     if(this.pacienteService.selectedIdPaciente === 0) {
       this._route.navigateByUrl('/pacientes/pacientes');
+    } else {
+      this.cargarTratamientos();
+      this.cargarDientesOdontograma();
+      this.cargarEstadosDiente();
     }
   }
 
@@ -54,21 +63,36 @@ export class OdontogramaComponent {
   public dientes7: string[] = ["71", "72", "73", "74", "75"];
   public dientes8: string[] = ["85", "84", "83", "82", "81"];
 
-  guardarOdonto() {
-    // this.htmlString = odonto.innerHTML;
-    // this.htmlString = odonto.innerHTML;
-    this.nativo = this.odontoTemplate;
-    const svgElements: NodeList = this.nativo.elementRef.nativeElement.ownerDocument.querySelectorAll(
-      "svg"
-    ) as NodeList;
-    let toStore = "";
-    svgElements.forEach(
-      (node: SVGElement) => (toStore = "<div>" + node.innerHTML + "</div>")
-    );
-    console.log(toStore);
-    localStorage.setItem("html", toStore);
-  }
+
   cargarOdonto() {
     this.odontoTemplate = this.nativo;
+  }
+
+  cargarDientesOdontograma() {
+    const idPaciente: number = this.pacienteService.selectedIdPaciente;
+    this.odontologiaService.getOdontograma(idPaciente)
+      .subscribe(resp => {
+        console.log(resp)
+      });
+  }
+
+  cargarPresupuesto() {
+    const idPaciente: number = this.pacienteService.selectedIdPaciente;
+    this.odontologiaService.getPresupuesto(idPaciente)
+      .subscribe(resp => {
+        this.total = resp.total;
+        this.presupuesto = resp.presupuesto;
+      });
+  }
+
+  cargarTratamientos() {
+    this.odontologiaService.getTratamientos()
+      .subscribe()
+  }
+
+  cargarEstadosDiente() {
+
+    this.odontologiaService.getEstadosDientes()
+      .subscribe()
   }
 }

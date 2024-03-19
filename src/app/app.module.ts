@@ -18,6 +18,8 @@ import { RecuPreguntasComponent } from './auth/recu-preguntas/recu-preguntas.com
 import { RecuCorreoComponent } from './auth/recu-correo/recu-correo.component';
 import { CambioPassComponent } from './auth/cambio-pass/cambio-pass.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { PerfilComponent } from './perfil/perfil.component';
     RecuPreguntasComponent,
     RecuCorreoComponent,
     CambioPassComponent,
-    PerfilComponent
+    PerfilComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { PerfilComponent } from './perfil/perfil.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    NgxChartsModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS,
     useClass: IntercepInterceptor,

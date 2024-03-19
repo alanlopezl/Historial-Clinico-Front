@@ -10,7 +10,7 @@
             <div class="card info-card sales-card">
 
                 <div class="card-body">
-                    <h5 class="card-title">Pacientes <span></span></h5>
+                    <h2 class="card-title  fw-bold">Pacientes <span></span></h2>
 
                     <div class="d-flex align-items-center">
                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -31,7 +31,7 @@
             <div class="card info-card sales-card">
 
                 <div class="card-body">
-                    <h5 class="card-title">Medicos <span></span></h5>
+                    <h2 class="card-title  fw-bold">Médicos <span></span></h2>
 
                     <div class="d-flex align-items-center">
                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -53,7 +53,7 @@
         <div class="col-lg-3">
             <div class="card info-card customers-card">
                 <div class="card-body">
-                    <h5 class="card-title">Especialidades <span></span></h5>
+                    <h2 class="card-title  fw-bold">Especialidades <span></span></h2>
                     <div class="d-flex align-items-center">
                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                             <i class="bi bi-people"></i>
@@ -73,7 +73,7 @@
         <div class="col-lg-3">
             <div class="card info-card customers-card">
                 <div class="card-body">
-                    <h5 class="card-title">Usuarios <span></span></h5>
+                    <h2 class="card-title  fw-bold">Usuarios <span></span></h2>
                     <div class="d-flex align-items-center">
                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                             <i class="bi bi-people"></i>
@@ -89,30 +89,69 @@
             </div>
         </div>
 
-        <!-- <div class="col-12">
-            <div class="card top-selling overflow-auto">
-                <div class="card-body pb-0">
-                    <h5 class="card-title">Los 10 productos con menos existencias <span></span></h5>
-                    <table class="table table-borderless">
-                        <thead>
-                            <tr>
-                                <th scope="col">Producto</th>
-                                <th scope="col">Precio</th>
-                                <th scope="col">Existencia</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let item of productos">
-                                <td><a href="#" class="text-primary fw-bold">{{item.NOMBRE_ARTICULO}}</a></td>
-                                <td>{{item.PRECIO_VENTA}}</td>
-                                <td class="fw-bold">{{item.EXISTENCIA}}</td>
-                            </tr>       
-                        </tbody>
-                    </table>
+        <hr class="mb-3">
+
+        <div class="d-flex justify-content-center">
+
+            <ngx-charts-bar-horizontal
+            [view]="view"
+            [scheme]="'vivid'"
+            [results]="single"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [legendTitle]="''"
+            (select)="onSelect($event)"
+            (activate)="onActivate($event)"
+            (deactivate)="onDeactivate($event)">
+    
+            </ngx-charts-bar-horizontal>
+        </div>
+
+        <hr class="mt-3">
+        <div class="col-lg-6">
+            <div class="card info-card sales-card">
+
+                <div class="card-body">
+                    <h2 class="card-title fw-bold">Cuestionarios <span></span></h2>
+
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-arrow-right"></i>
+                        </div>
+                        <div class="ps-3">
+                            <a routerLink="/mantenimiento/cuestionario" class="pt-2 ps-1">Ir a mantenimiento</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div> -->
+        </div>
+
+
+        <div class="col-lg-6">
+            <div class="card info-card sales-card">
+
+                <div class="card-body">
+                    <h2 class="card-title fw-bold">Enfermedades <span></span></h2>
+
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-arrow-right"></i>
+                        </div>
+                        <div class="ps-3">
+
+                            <a routerLink="/mantenimiento/enfermedades" class="pt-2 ps-1">Ir a mantenimiento</a>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        
 
     </div>
 

@@ -20,6 +20,7 @@ import { PersonaComponent } from './usuarios/persona/persona.component';
 import { EstadosComponent } from './estados/estados.component';
 import { InsertUpdateEstadoComponent } from './estados/insert-update-estado/insert-update-estado.component';
 import { BackupComponent } from './backup/backup.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [UsuariosComponent, UsuariosInsertUpdateComponent,
@@ -29,7 +30,8 @@ import { BackupComponent } from './backup/backup.component';
     SeguridadRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxChartsModule
   ]
 })
 

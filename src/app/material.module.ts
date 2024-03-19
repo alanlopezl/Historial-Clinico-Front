@@ -21,6 +21,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [FilterPipe],
@@ -43,7 +44,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatNativeDateModule,MatAutocompleteModule,
     MatTabsModule,
     MatMenuModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    NgxChartsModule
   ],
   exports: [
     FilterPipe,
@@ -65,7 +67,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatAutocompleteModule,
     MatProgressBarModule,
     MatMenuModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    NgxChartsModule
   ]
 })
 export class MaterialModule { }
