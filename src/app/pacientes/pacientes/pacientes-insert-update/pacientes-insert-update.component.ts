@@ -79,10 +79,11 @@ export class PacientesInsertUpdateComponent {
               tabla: 'PACIENTE',
             };
             this._bitacora.crear(params).subscribe();
+            this.cerrarmodal();
           }
           this._service.mostrar();
         });
-        this.cerrarmodal();
+        
       } else {
         // actualiza ususario
         let datos = this._service.register.value;
@@ -97,7 +98,16 @@ export class PacientesInsertUpdateComponent {
           nacimiento: datos.FEC_NACIMIENTO,
           estado: datos.EST_CIVIL,
           sexo: datos.SEXO,
-          idtipo:2
+          idtipo:2,
+          edad: datos.EDAD,
+          email: datos.EMAIL,
+          civil: datos.CIVIL,
+          ocupacion: datos.OCUPACION,
+          tel: datos.TEL,
+          cont_emer: datos.CONTACTO_EMERGENCIA,
+          emer_tel: datos.EMERGENCIA_TEL,
+          obs: datos.OBS,
+          dir: datos.DIRECCION
         };
        
         this._service.actualizar(params).subscribe((resp: any) => {

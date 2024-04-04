@@ -22,15 +22,15 @@ export class DashboardComponent {
 
 
     forkJoin({
-    pacientes: this.http.get(environment.url+'countP'),
-    medico: this.http.get(environment.url+'countM'),
-    usuarios: this.http.get(environment.url+'countU')
-  }).subscribe((res: any) => {
-    this.pacientes = res.pacientes.data[0].id;
-    this.medico = res.medico.data[0].id;
-    this.usuarios = res.usuarios.data[0].id;
-    this.updateData();
-  });
+      pacientes: this.http.get(environment.url+'countP'),
+      medico: this.http.get(environment.url+'countM'),
+      usuarios: this.http.get(environment.url+'countU')
+    }).subscribe((res: any) => {
+      this.pacientes = res.pacientes.data[0].id;
+      this.medico = res.medico.data[0].id;
+      this.usuarios = res.usuarios.data[0].id;
+      this.updateData();
+    });
   }
 
   single: any[] = [];

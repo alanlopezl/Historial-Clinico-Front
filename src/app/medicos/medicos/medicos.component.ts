@@ -87,7 +87,7 @@ export class MedicosComponent {
           this._service.eliminar(id).subscribe(resp => {
             this._service.mostrar(this.buscar);
             if (!resp.ok) {
-              this._sweet.mensajeSimple('Ocurrio un error', 'MEDICO', 'error');
+              this._sweet.mensajeSimple('No se puede eliminar, médico en uso', 'MEDICO', 'error');
             } else {
               let params = {
                 operacion: 'ELIMINO',

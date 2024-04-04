@@ -27,7 +27,7 @@ export class GlobalService {
   }
 
   updatepassuser(params:any){
-   return this.http.put(`${environment.url+"usuariopassupdate"}`,params).pipe(map((resp:any)=>resp));
+   return this.http.put(`${environment.url+"usuariopassupdate"}`,params).pipe(catchError(err => of(err.error.msg)));
   }
 
   obtener(url: string): Observable<any> {
@@ -48,20 +48,7 @@ export class GlobalService {
 // ...
 
 crearUserPers(params: any): Observable<any> {
-  return this.http.post(`${environment.url}personauser`, params).pipe(
-    catchError(error => {
-      if (error.status === 401 && error.error && error.error.message === 'Token no válido') {
-        // Manejar el error específico de token no válido
-        console.error('Error de token no válido:', error);
-        // Puedes redirigir al usuario a la página de inicio de sesión u tomar otras acciones
-      } else {
-        // Otros errores
-        console.error('Error en la solicitud:', error);
-      }
-      // Devuelve un observable de algún valor predeterminado o lanza el error nuevamente
-      return of({ ok: false, message: 'Hubo un problema en la solicitud.' });
-    })
-  );
+  return this.http.post(`${environment.url}personauser`, params).pipe(catchError(err => of(err.error.mensaje)));
 }
 
 

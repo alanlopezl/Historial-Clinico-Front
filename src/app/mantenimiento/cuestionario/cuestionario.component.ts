@@ -101,7 +101,7 @@ export class CuestionarioComponent {
             if (!resp.ok) {
               console.log(resp);
               this._sweet.mensajeSimple(
-                'No se puede eliminar',
+                'No se puede eliminar, en uso',
                 'CUESTIONARIO',
                 'error'
               );

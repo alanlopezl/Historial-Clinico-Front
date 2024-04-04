@@ -53,12 +53,12 @@ export class InsertUpdateEnfermedadComponent {
           if(!resp.ok){
             this._sweet.mensajeSimple(resp.msg,'ENFERMEDAD','warning');
           }else{
-            this._sweet.mensajeSimple('Rol creado correctamente', 'Enfermedad', 'success');
+            this._sweet.mensajeSimple('Enfermedad creada correctamente', 'Enfermedad', 'success');
             let params = {
               operacion:'INSERTO',
               fecha: new Date(),
               idusuario:localStorage.getItem('user'),
-              tabla:'ROLES',
+              tabla:'ENFERMEDAD',
             }
             this._bitacora.crear(params).subscribe();
           }
@@ -70,19 +70,19 @@ export class InsertUpdateEnfermedadComponent {
         let datos = this._service.register.value;
 
         let params = {
-          id: datos.ID_ENFERMEDAD,
+          id: this._service.register.get('ID_ENFERMEDAD')?.value,
           nombre: datos.NOMBRE,
         };
         this._service.actualizar(params).subscribe((resp: any) => {
           if(!resp.ok){
             this._sweet.mensajeSimple(resp.msg,'ENFERMEDAD','warning');
           }else{
-          this._sweet.mensajeSimple('Rol actualizado correctamente', 'Enfermedad', 'success');
+          this._sweet.mensajeSimple('Enfermedad actualizada correctamente', 'Enfermedad', 'success');
           let params = {
             operacion:'ACTUALIZO',
             fecha: new Date(),
             idusuario:localStorage.getItem('user'),
-            tabla:'ROLES',
+            tabla:'ENFERMEDAD',
           }
           this._bitacora.crear(params).subscribe();
         }

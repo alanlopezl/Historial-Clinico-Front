@@ -64,7 +64,7 @@ export class CitasPackageService {
   mostrarfiltro(id:number,espe:number,busqueda: string=""){
     console.log(id,espe);
     this.Cargando$.next(true);
-    const request$ = this._globals.obtener(`cita/${espe}/${id}?busqueda=`+busqueda).pipe(tap((resp:any)=>{
+    const request$ = this._globals.obtener(`cita/all/citas/pacientes?busqueda=`+busqueda).pipe(tap((resp:any)=>{
     this.Cargando$.next(false);
      this.cita.next(resp)
    }));

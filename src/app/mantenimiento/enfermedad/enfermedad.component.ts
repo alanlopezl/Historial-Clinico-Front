@@ -100,8 +100,8 @@ export class EnfermedadComponent {
             if (!resp.ok) {
               console.log(resp);
               this._sweet.mensajeSimple(
-                'No se puede eliminar',
-                'ROLES',
+                'No se puede eliminar, en uso',
+                'Enfermedad',
                 'error'
               );
             } else {
@@ -114,7 +114,7 @@ export class EnfermedadComponent {
               this._bitacora.crear(params).subscribe();
               this._sweet.mensajeSimple(
                 'Eliminado correctamente',
-                'ROLES',
+                'Enfermedad',
                 'success'
               );
             }

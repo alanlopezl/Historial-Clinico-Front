@@ -30,12 +30,12 @@ export class LoginComponent {
 
 
   login() {
-
+    console.log('hola')
     if(!this.loginForm.valid){
       this._sweet.mensajeSimple('Por favor ingrese los datos correctamente','','error');
     }else{
       this._service.login(this.loginForm.value).subscribe(data => {
- console.log(data);
+        console.log(data);
         if(data.ok){
           if(data.data.ID_ESTADO == 4){
             localStorage.setItem("token",JSON.stringify(data.token));

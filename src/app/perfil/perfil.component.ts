@@ -78,15 +78,17 @@ export class PerfilComponent {
       Notiflix.Notify.failure('Las contraseñas no coinciden');
     } else {
       let params = {
-        id: this.usuario.ID_USUARIO,
-        newpass: this.formpass.value.newpass,
-        pass: this.formpass.value.pass,
+        idUsuario: this.usuario.ID_USUARIO,
+        contrasena: this.formpass.value.newpass,
+        confirmacion: this.formpass.value.repeatpass,
+        contrasenaActual: this.formpass.value.pass
       };
       this.global.updatepassuser(params).subscribe((resp) => {
-        if (resp.ok) {
-          Notiflix.Notify.success(resp.data);
+        console.log('hola')
+        if (resp.ok === true) {
+          Notiflix.Notify.success(resp.msg);
         } else {
-          Notiflix.Notify.failure(resp.data);
+          Notiflix.Notify.failure(resp);
         }
       });
     }

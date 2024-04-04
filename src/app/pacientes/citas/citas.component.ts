@@ -54,7 +54,7 @@ export class CitasComponent {
   }
 
   ngOnInit(): void {
-    
+    this.mostrardta(2);
   }
 
   busqueda() {

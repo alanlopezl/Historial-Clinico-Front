@@ -70,7 +70,7 @@ export class InsertUpdateCuestionarioComponent {
         let datos = this._service.register.value;
 
         let params = {
-          id: datos.ID_ENFERMEDAD,
+          id: this._service.register.get('ID_CUESTIONARIO')?.value,
           nombre: datos.NOMBRE,
         };
         this._service.actualizar(params).subscribe((resp: any) => {

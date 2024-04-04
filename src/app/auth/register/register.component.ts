@@ -27,10 +27,10 @@ export class RegisterComponent {
       SEGUNDO_APELLIDO: new FormControl(''),
       DNI: new FormControl('', Validators.required),
       FEC_NACIMIENTO: new FormControl('', Validators.required),
-      EST_CIVIL: new FormControl('', Validators.required),
+      // EST_CIVIL: new FormControl('', Validators.required),
       SEXO: new FormControl('', Validators.required),
       TELEFONO: new FormControl('', Validators.required),
-      DIREECION: new FormControl('', Validators.required),
+      DIRECCION: new FormControl('', Validators.required),
       USUARIO: new FormControl('', Validators.required),
       EMAIL: new FormControl('', [Validators.required, Validators.email]),
       CONTRASEÑA: new FormControl('', [Validators.required, Validators.min(8)]), 
@@ -57,7 +57,7 @@ export class RegisterComponent {
           EST_CIVIL: this.registerForm.value.EST_CIVIL,
           SEXO: this.registerForm.value.SEXO,
           TELEFONO: this.registerForm.value.TELEFONO,
-          DIREECION: this.registerForm.value.DIREECION,
+          DIRECCION: this.registerForm.value.DIRECCION,
           USUARIO: this.registerForm.value.USUARIO,
           EMAIL: this.registerForm.value.EMAIL,
           CONTRASEÑA: this.registerForm.value.CONTRASEÑA
@@ -80,14 +80,16 @@ export class RegisterComponent {
     // Asigna la suscripción a la variable
     this.suscripcion = this.service.crearUserPers(params).subscribe(
       resp => {
-        this._sweet.mensajeSimple('Registro', 'Registrado correctamente', 'success');
-        this._router.navigate(['/inicio']);
-      },
-      error => {
-        console.error('Error en la suscripción:', error);
+        console.log(resp)
+        if(resp.ok === true) {
+          this._sweet.mensajeSimple('Registro', resp.mensaje, 'success');
+          this._router.navigate(['/inicio']);
 
-        // Aquí puedes agregar lógica adicional, como mostrar un mensaje de error al usuario
-        this._sweet.mensajeSimple('Registro', 'Error al registrar', 'error');
+        } else {
+
+          // Aquí puedes agregar lógica adicional, como mostrar un mensaje de error al usuario
+          this._sweet.mensajeSimple('Registro', resp, 'error');
+        }
       }
     );
         

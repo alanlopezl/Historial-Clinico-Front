@@ -12,6 +12,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { CorreoGuard } from './guard/correo.guard';
+import { CitasModule } from './citas/citas.module';
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -51,6 +52,10 @@ const routes: Routes = [
       {
         path: 'mantenimiento',
         loadChildren: () => import('./mantenimiento/mantenimiento.module').then(m => m.MantenimientoModule)
+      },
+      {
+        path: 'citas',
+        loadChildren: () => import('./citas/citas.module').then(m => m.CitasModule)
       }
      
     ]

@@ -120,7 +120,7 @@ export class PacientesComponent {
             if (!resp.ok) {
               console.log(resp);
               this._sweet.mensajeSimple(
-                'No se puede eliminar',
+                'No se puede eliminar, paciente en uso',
                 'Pacientes',
                 'error'
               );
