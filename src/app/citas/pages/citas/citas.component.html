@@ -56,7 +56,7 @@
 
                 <div *ngIf="(_service.response$ | async ).length == 0 && !(_service.responseCargando$ | async)">
                     <div class="alert alert-warning text-center" role="alert">
-                        Seleccione el medico y su especialidad
+                        No tiene citas asignadas
                     </div>
                 </div>
 
@@ -70,7 +70,8 @@
                                 <tr class="botonnegro text-center">
                                     <th class="thp" scope="col" role="columnheader">Id</th>
                                     <th class="thp" scope="col" role="columnheader">Paciente</th>
-                                    <th class="thp" scope="col" role="columnheader">Motivo</th>
+                                    <th class="thp" scope="col" role="columnheader">Motivo</th>                                    
+                                    <th class="thp" scope="col" role="columnheader">Estado</th>
                                     <th class="thp" scope="col" role="columnheader">Fecha cita</th>
                                     <th *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d"
                                         class="thp" scope="col" role="columnheader">Opciones</th>
@@ -82,16 +83,29 @@
                                     [attr.data-index]="i">
                                     <td role="cell" data-title="Nombre" class="tdp"> {{i+1}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.PRIMER_NOMBRE}} {{item.PRIMER_APELLIDO}}</td>
-                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.MOTIVO}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.MOTIVO}}</td>                                    
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.NOMBRE}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.FECHA_CITA | date:'medium'}}</td>
-
                                     <td *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d"
                                         role="cell" data-title="Opciones" class="tdp">
                                         <div class="text-center">
-                                            <button class="botonnegro" title="Tratamiento" mat-mini-fab
-                                                routerLink="/pacientes/tratamiento"  [queryParams]="item">
+                                            <button class="botonnegro" [matMenuTriggerFor]="menu" title="Tratamiento" mat-mini-fab>
                                                 <mat-icon>medication</mat-icon>
                                             </button>
+                                            <mat-menu #menu="matMenu">
+                                                <button mat-menu-item (click)="editar(item)" aria-label="Example icon-button with a menu">
+                                                    <mat-icon>edit</mat-icon>
+                                                    <span>Editar cita</span>
+                                                </button>
+                                                <button mat-menu-item (click)="confirmateDate(item.ID_CITA)" aria-label="Example icon-button with a menu">
+                                                    <mat-icon>how_to_reg</mat-icon>
+                                                    <span>Confirmar cita</span>
+                                                </button>
+                                                <button mat-menu-item (click)="completeDate(item.ID_CITA)" aria-label="Example icon-button with a menu">
+                                                    <mat-icon>done_all</mat-icon>
+                                                    <span>Concluir cita</span>
+                                                </button>
+                                            </mat-menu>
                                             <button *ngIf="permisos?.ELIMINAR == 'SI'" mat-mini-fab color="warn"  (click)="eliminar(item.ID_CITA)" >
                                                 <mat-icon>delete_forever</mat-icon>
                                             </button>

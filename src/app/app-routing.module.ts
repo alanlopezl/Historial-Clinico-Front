@@ -13,6 +13,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { CorreoGuard } from './guard/correo.guard';
 import { CitasModule } from './citas/citas.module';
+import { MailConfirmationComponent } from './shared/mail-confirmation/mail-confirmation.component';
+import { MailDeclineComponent } from './shared/mail-decline/mail-decline.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -23,6 +25,12 @@ const routes: Routes = [
    { path: 'recuperacion-preguntas', component: RecuPreguntasComponent },
    { path: 'recuperacion-correo', component: RecuCorreoComponent },
   { path: 'registro', component: RegisterComponent },
+  {
+    path:'confirmation/:token',component:MailConfirmationComponent
+  },
+  {
+    path:'decline/:token',component:MailDeclineComponent
+  },
   {
     path: '',
     component: FullComponentComponent,canActivate:[AuthGuard],

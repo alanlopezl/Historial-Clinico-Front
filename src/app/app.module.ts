@@ -20,6 +20,9 @@ import { CambioPassComponent } from './auth/cambio-pass/cambio-pass.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CommonModule } from '@angular/common';
+import { MailConfirmationComponent } from './shared/mail-confirmation/mail-confirmation.component';
+import { MailDeclineComponent } from './shared/mail-decline/mail-decline.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +36,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     RecuCorreoComponent,
     CambioPassComponent,
     PerfilComponent,
-    DashboardComponent
+    DashboardComponent,
+    MailConfirmationComponent,
+    MailDeclineComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

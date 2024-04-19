@@ -10,6 +10,7 @@ import * as XLSX from 'xlsx';
 import { EspecialidadPackageService } from 'src/app/medicos/especialidad/especialidad-package.service';
 import { MedicosPackageService } from 'src/app/medicos/medicos/medicos-package.service';
 import { CitasPackageService } from 'src/app/pacientes/citas/citas-package.service';
+import { CitasInsertUpdateComponent } from 'src/app/pacientes/citas/citas-insert-update/citas-insert-update.component';
 
 @Component({
   selector: 'app-citas',
@@ -35,6 +36,7 @@ export class CitasComponent {
   usuario: any; //paso //2
   idmedico:number;
   permisos: any = [];
+  idMedico = localStorage.getItem('user');
 
   constructor(
     public _service: CitasPackageService,
@@ -55,24 +57,25 @@ export class CitasComponent {
   }
 
   ngOnInit(): void {
+    this._service.idmedico = parseInt( this.idMedico );
     this.mostrardta(2);
   }
 
   busqueda() {
     //this._service.mostrar(this.buscar);
-    this._service.mostrarfiltro(11, 1, this.buscar);
+    this._service.mostrarCitasMedico(this.buscar, this.idMedico);
+    // this._service.mostrarfiltro(11, 1, this.buscar);
   }
 
   //muestra especialidad del select
   mostrar(event: any) {
     this._service.idespecialidad = event.value;
-    this._medico.mostraridespe(event.value);
+    this._medico.mostrar(event.value);
   }
 
   //muestra la tabla
   mostrardta(event: any) {
-    this._service.idmedico = event.value;
-    this._service.mostrarfiltro(this._service.idespecialidad,event.value);
+    this._service.mostrarCitasMedico(event.value, this.idMedico);
   }
 
   ngOnDestroy(): void {}
@@ -82,22 +85,67 @@ export class CitasComponent {
     this.h = this.d + e.pageSize;
   }
 
+  editar(item: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "25%";
+    this._dialog.open(CitasInsertUpdateComponent);
+    console.log(item)
+    this._service.popForm(item);
+
+  }
+
+  confirmateDate(idDate: number) {
+    this._service.updateStatusOrder(2, idDate)
+      .subscribe(resp => {
+        if (!resp.ok) {
+          console.log(resp);
+          this._sweet.mensajeSimple(
+            'No se puede confirmar la cita',
+            'CITA',
+            'error'
+          );
+        } else {
+          this._service.mostrarfiltro(this._service.idespecialidad, this.buscar);
+          this._sweet.mensajeSimple(
+            '¡Cita confirmada!',
+            'CITA',
+            'success'
+          );
+        }
+      })
+  }
+
+  completeDate(idDate: number) {
+    this._service.updateStatusOrder(4, idDate)
+      .subscribe(resp => {
+        if (!resp.ok) {
+          console.log(resp);
+          this._sweet.mensajeSimple(
+            'No se puede concluir la cita',
+            'CITA',
+            'error'
+          );
+        } else {
+          this._service.mostrarfiltro(this._service.idespecialidad, this.buscar);
+          this._sweet.mensajeSimple(
+            '¡Cita concluida!',
+            'CITA',
+            'success'
+          );
+        }
+      })
+  }
+
   crear() {
-    console.log(this.especialidad);
-    if (this.especialidad != undefined && this.medico != undefined) {
-      this._service.inicializarForm();
-      // this._dialog.open(CitasInsertUpdateComponent, {
-      //   width: '40%',
-      //   disableClose: true,
-      //   autoFocus: true,
-      // });
-    } else {
-      this._sweet.mensajeSimple(
-        'Cita',
-        'Por favor seleccione los campos',
-        'error'
-      );
-    }
+    this._service.soloMisCitas = true;
+    this._service.inicializarForm();
+    this._dialog.open(CitasInsertUpdateComponent, {
+      width: '40%',
+      disableClose: true,
+      autoFocus: true,
+    });
   }
 
   eliminar(id: number) {

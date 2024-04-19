@@ -99,4 +99,10 @@ crearUserPers(params: any): Observable<any> {
     )
   }
 
+  validarTokenCorreoCliente(token: string, status: number) {
+
+    const url: string = `${this.baseURL}cita/client/${token}`;
+    return this.http.put( url, {status} )
+  }
+
 }

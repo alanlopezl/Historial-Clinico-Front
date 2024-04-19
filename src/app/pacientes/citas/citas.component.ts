@@ -68,6 +68,11 @@ export class CitasComponent {
     this._medico.mostraridespe(event.value);
   }
 
+  setMedico(idMedico) {
+    this._service.idmedico = idMedico.value;
+    console.log(this._service.idespecialidad)
+  }
+
   //muestra la tabla
   mostrardta(event: any) {
     this._service.idmedico = event.value;
@@ -84,6 +89,7 @@ export class CitasComponent {
   crear() {
     console.log(this.especialidad);
     if (this.especialidad != undefined && this.medico != undefined) {
+      this._service.soloMisCitas = false;
       this._service.inicializarForm();
       this._dialog.open(CitasInsertUpdateComponent, {
         width: '40%',
@@ -97,6 +103,59 @@ export class CitasComponent {
         'error'
       );
     }
+  }
+
+  editar(item: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "25%";
+    this._dialog.open(CitasInsertUpdateComponent);
+    console.log(item)
+    this._service.popForm(item);
+
+  }
+
+  confirmateDate(idDate: number) {
+    this._service.updateStatusOrder(2, idDate)
+      .subscribe(resp => {
+        if (!resp.ok) {
+          console.log(resp);
+          this._sweet.mensajeSimple(
+            'No se puede confirmar la cita',
+            'CITA',
+            'error'
+          );
+        } else {
+          this._service.mostrarfiltro(this._service.idespecialidad, this.buscar);
+          this._sweet.mensajeSimple(
+            '¡Cita confirmada!',
+            'CITA',
+            'success'
+          );
+        }
+      })
+  }
+
+  completeDate(idDate: number) {
+    this._service.updateStatusOrder(4, idDate)
+      .subscribe(resp => {
+        if (!resp.ok) {
+          console.log(resp);
+          this._sweet.mensajeSimple(
+            'No se puede concluir la cita',
+            'CITA',
+            'error'
+          );
+        } else {
+          this._service.mostrarfiltro(this._service.idespecialidad, this.buscar);
+          this._sweet.mensajeSimple(
+            '¡Cita concluida!',
+            'CITA',
+            'success'
+          );
+        }
+      })
   }
 
   eliminar(id: number) {

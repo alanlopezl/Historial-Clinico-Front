@@ -25,6 +25,8 @@ export class CitasPackageService {
   private url = `${environment.url}cita`;
   idmedico:number;
   idespecialidad:number;
+  soloMisCitas: any = false;
+
   constructor(private _http:HttpClient,private _globals:GlobalService) { }
 
 
@@ -48,7 +50,13 @@ export class CitasPackageService {
   }
 
   popForm(data:any){
-    this.register.setValue(data);
+    this.register.setValue({
+      ID_CITA:data.ID_CITA,
+      ID_PACIENTE:data.ID_PACIENTE,
+      ID_ESTADO_CITA:data.ID_ESTADO_CITA,
+      MOTIVO:data.MOTIVO,
+      FECHA_CITA:data.FECHA_CITA
+    });
   }
 
    mostrar(busqueda: string=""){
@@ -60,6 +68,14 @@ export class CitasPackageService {
     return request$.subscribe();
   }
 
+  mostrarCitasMedico(busqueda: string="", idMedico){
+    this.Cargando$.next(true);
+    const request$ = this._globals.obtener('cita/medico/'+idMedico+'/search/pls?busqueda='+busqueda).pipe(tap((resp:any)=>{
+    this.Cargando$.next(false);
+     this.cita.next(resp)
+   }));
+    return request$.subscribe();
+  }
   
   mostrarfiltro(id:number,espe:number,busqueda: string=""){
     console.log(id,espe);
@@ -84,6 +100,12 @@ export class CitasPackageService {
 
   actualizar(params:any):Observable<any>{
     return this._http.put(this.url,params).pipe(map((resp:any)=>resp));
+  }
+
+  updateStatusOrder(idStatus: number, idDate: number):Observable<any>{
+    return this._http.put(this.url+'/status',{
+      id: idDate, estado: idStatus
+    });
   }
 
   eliminar(id:any):Observable<any>{

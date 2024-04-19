@@ -48,9 +48,10 @@ export class MedicosComponent {
     ) {
       paginator.itemsPerPageLabel = 'Cantidad por página'; 
     this._service.mostrar();
-    this._service.mostrarpermiso(localStorage.getItem('rol'),9);
+    this._service.mostrarpermiso(localStorage.getItem('rol'),17);
     this._service.responsepermiso$.subscribe(r=>{
      this.permisos = r[0];
+     console.log(this.permisos)
     })
 }
 

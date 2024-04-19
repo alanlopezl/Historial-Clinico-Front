@@ -65,7 +65,6 @@ export class CitasInsertUpdateComponent {
           especialidad:this._service.idespecialidad
         };
 
-
         this._service.crear(params).subscribe(resp => {
           console.log(resp);
           if(!resp.ok){
@@ -79,7 +78,12 @@ export class CitasInsertUpdateComponent {
               tabla:'CITA',
             }
             this._bitacora.crear(params).subscribe();
-            this._service.mostrarfiltro(this._service.idmedico,this._service.idespecialidad)
+
+            if(this._service.soloMisCitas) {
+              this._service.mostrarCitasMedico("", this._service.idmedico)
+            } else {
+              this._service.mostrarfiltro(this._service.idmedico,this._service.idespecialidad)
+            }
 
           }
         });
@@ -111,8 +115,12 @@ export class CitasInsertUpdateComponent {
             tabla:'CITA',
           }
           this._bitacora.crear(params).subscribe();
+          if(this._service.soloMisCitas) {
+            this._service.mostrarCitasMedico("", this._service.idmedico)
+          } else {
+            this._service.mostrarfiltro(this._service.idmedico,this._service.idespecialidad)
+          }
         }
-          this._service.mostrar();
           this.cerrarmodal();
         });
       

@@ -26,7 +26,7 @@
                 <div class="col-md-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Medico</mat-label>
-                        <mat-select [(ngModel)]="medico">
+                        <mat-select [(ngModel)]="medico" (selectionChange)="setMedico($event)">
                             <mat-option *ngFor="let item of (_medico.responseM$ | async)" [value]="item.COD_PERSONA">
                                 {{item.PRIMER_NOMBRE}} {{ item.PRIMER_APELLIDO }} - {{item.DNI}}
                             </mat-option>
@@ -92,6 +92,7 @@
                                     <th class="thp" scope="col" role="columnheader">Paciente</th>
                                     <th class="thp" scope="col" role="columnheader">Medico</th>
                                     <th class="thp" scope="col" role="columnheader">Motivo</th>
+                                    <th class="thp" scope="col" role="columnheader">Estado</th>
                                     <th class="thp" scope="col" role="columnheader">Fecha cita</th>
                                     <th *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d"
                                         class="thp" scope="col" role="columnheader">Opciones</th>
@@ -105,15 +106,29 @@
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.PRIMER_NOMBRE}} {{item.PRIMER_APELLIDO}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.MEDICO_NOMBRE}} {{item.MEDICO_APELLIDO}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.MOTIVO}}</td>
+                                    <td role="cell" data-title="Nombre" class="tdp"> {{item.NOMBRE}}</td>
                                     <td role="cell" data-title="Nombre" class="tdp"> {{item.FECHA_CITA | date:'medium'}}</td>
 
                                     <td *ngIf="permisos?.ACTUALIZAR == 'SI' || permisos?.ELIMINAR == 'SI'" id="d"
                                         role="cell" data-title="Opciones" class="tdp">
                                         <div class="text-center">
-                                            <button class="botonnegro" title="Tratamiento" mat-mini-fab
-                                                routerLink="/pacientes/tratamiento"  [queryParams]="item">
+                                            <button class="botonnegro" [matMenuTriggerFor]="menu" title="Tratamiento" mat-mini-fab>
                                                 <mat-icon>medication</mat-icon>
                                             </button>
+                                            <mat-menu #menu="matMenu">
+                                                <button mat-menu-item (click)="editar(item)" aria-label="Example icon-button with a menu">
+                                                    <mat-icon>edit</mat-icon>
+                                                    <span>Editar cita</span>
+                                                </button>
+                                                <button mat-menu-item (click)="confirmateDate(item.ID_CITA)" aria-label="Example icon-button with a menu">
+                                                    <mat-icon>how_to_reg</mat-icon>
+                                                    <span>Confirmar cita</span>
+                                                </button>
+                                                <button mat-menu-item (click)="completeDate(item.ID_CITA)" aria-label="Example icon-button with a menu">
+                                                    <mat-icon>done_all</mat-icon>
+                                                    <span>Concluir cita</span>
+                                                </button>
+                                            </mat-menu>
                                             <button *ngIf="permisos?.ELIMINAR == 'SI'" mat-mini-fab color="warn"  (click)="eliminar(item.ID_CITA)" >
                                                 <mat-icon>delete_forever</mat-icon>
                                             </button>
