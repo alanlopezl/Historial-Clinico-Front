@@ -18,7 +18,8 @@ import { ExploracionInfoComponent } from './pacientes/exploracion-info/exploraci
 import { DienteComponent } from './odontograma/components/diente/diente.component';
 import { ModalComponent } from './odontograma/components/modal/modal.component';
 import { ModalHistorialDienteComponent } from './odontograma/components/modal-historial-diente/modal-historial-diente.component';
-import { ModalPresupuestoComponent } from './odontograma/components/modal-presupuesto/modal-presupuesto.component'; 
+import { ModalPresupuestoComponent } from './odontograma/components/modal-presupuesto/modal-presupuesto.component';
+import { TratamientoDienteComponent } from './odontograma/components/tratamiento-diente/tratamiento-diente.component'; 
 @NgModule({
   declarations: [
     PacientesComponent,
@@ -32,7 +33,8 @@ import { ModalPresupuestoComponent } from './odontograma/components/modal-presup
     DienteComponent,
     ModalComponent,
     ModalHistorialDienteComponent,
-    ModalPresupuestoComponent
+    ModalPresupuestoComponent,
+    TratamientoDienteComponent
   ],
   imports: [
     CommonModule,

@@ -21,6 +21,7 @@ export class DienteComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.odontologiaService.odontograma$.subscribe(odontograma => {
+      this.limpiarTodosDientes();
       odontograma.forEach((diente) => {
         if(diente.INDICE_DIENTE == this.numeroDiente) {
           switch (diente.LADO_DIENTE) {
@@ -102,6 +103,25 @@ export class DienteComponent {
     {lado: 4, estado: '', observacion: '', tratamiento: 0},
   ];
 
+  limpiarDiente(id: string) {
+    const lado: HTMLElement | null = document.getElementById(id);
+    for (let index = 1; index <= 5; index++) {
+      let newId = id.slice(0, -1) + index;
+      const lado: HTMLElement | null = document.getElementById(newId);
+      lado.attributes.setNamedItem(
+        lado.attributes.getNamedItem("fill")
+      ).value = "white";
+    }
+  }
+
+  limpiarTodosDientes() {
+    this.limpiarDiente(this.numeroDiente+'1')
+    this.limpiarDiente(this.numeroDiente+'2')
+    this.limpiarDiente(this.numeroDiente+'3')
+    this.limpiarDiente(this.numeroDiente+'4')
+    this.limpiarDiente(this.numeroDiente+'5')
+  }
+
   selectLado(id: string) {
     this.odontologiaService.numeroDienteSeleccionado = this.numeroDiente;
     switch (id) {
@@ -135,6 +155,7 @@ export class DienteComponent {
         break;
     }
     this.cargarHistorial()
+    this.cargarInfo()
   }
 
   changeColor(id: string, color: any) {
@@ -176,6 +197,13 @@ export class DienteComponent {
     const idPaciente = this.pacienteService.selectedIdPaciente;
     const ladoSeleccionado = this.odontologiaService.ladoSeleccionadoNombre;
     this.odontologiaService.getHistorialDiente(idPaciente, ladoSeleccionado, this.numeroDiente)
+      .subscribe();
+  }
+
+  cargarInfo() {
+    const idPaciente = this.pacienteService.selectedIdPaciente;
+    const ladoSeleccionado = this.odontologiaService.ladoSeleccionadoNombre;
+    this.odontologiaService.getInfoDiente(idPaciente, ladoSeleccionado, this.numeroDiente)
       .subscribe();
   }
 

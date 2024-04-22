@@ -11,6 +11,10 @@ import { EnfermedadComponent } from './enfermedad/enfermedad.component';
 import { CuestionarioComponent } from './cuestionario/cuestionario.component';
 import { InsertUpdateCuestionarioComponent } from './cuestionario/insert-update-cuestionario/insert-update-cuestionario.component';
 import { InsertUpdateEnfermedadComponent } from './enfermedad/insert-update-enfermedad/insert-update-enfermedad.component';
+import { EstadoDienteComponent } from './estado-diente/estado-diente.component';
+import { TratamientoMantenimientoComponent } from './tratamiento-mantenimiento/tratamiento-mantenimiento.component';
+import { FormEstadoDienteComponent } from './estado-diente/form-estado-diente/form-estado-diente.component';
+import { FormTratamientoComponent } from './tratamiento-mantenimiento/form-tratamiento/form-tratamiento.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import { InsertUpdateEnfermedadComponent } from './enfermedad/insert-update-enfe
     EnfermedadComponent,
     CuestionarioComponent,
     InsertUpdateCuestionarioComponent,
-    InsertUpdateEnfermedadComponent
+    InsertUpdateEnfermedadComponent,
+    EstadoDienteComponent,
+    TratamientoMantenimientoComponent,
+    FormEstadoDienteComponent,
+    FormTratamientoComponent
   ],
   imports: [
     CommonModule,

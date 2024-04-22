@@ -15,6 +15,7 @@ export class ModalComponent {
   @ViewChild('close') closeModal!: ElementRef;
   @Output() onSubmit: EventEmitter<any> = new EventEmitter();
   viewHistory: boolean = false;
+  viewTratamiento: boolean = false;
 
   constructor(public odontologiaService: OdontogramaService, private fb: FormBuilder, private _sweet: SweetAlertService, public pacienteService: PacientesPackageService){}
 
@@ -23,9 +24,12 @@ export class ModalComponent {
   estadosDientes = [];
 
   formularioOdontograma: FormGroup = this.fb.group({
-    tratamiento: ['', [Validators.required]],
     estado: ['', [Validators.required]],
     observacion: ['', [Validators.maxLength(100)]]
+  })
+
+  formularioTratamiento: FormGroup = this.fb.group({
+    tratamiento: ['', [Validators.required]],
   })
   
   ngOnInit(): void {
@@ -40,6 +44,11 @@ export class ModalComponent {
     
   }
 
+  guardarTratamientos() {
+    this.formularioTratamiento.reset();
+    this.closeModal.nativeElement.click()
+  }
+
   openHistory() {
     console.log(
       this.odontologiaService.idDienteSeleccionado, " ",
@@ -48,6 +57,24 @@ export class ModalComponent {
       this.odontologiaService.numeroLadoSeleccionadoNombre,  " ",
     )
     this.viewHistory = !this.viewHistory;
+    this.viewTratamiento = false;
+  }
+
+  openTratamiento() {
+    console.log(
+      this.odontologiaService.idDienteSeleccionado, " ",
+      this.odontologiaService.ladoSeleccionadoNombre,  " ",
+      this.odontologiaService.numeroDienteSeleccionado,  " ",
+      this.odontologiaService.numeroLadoSeleccionadoNombre,  " ",
+    )
+    this.viewTratamiento = !this.viewTratamiento;
+    this.viewHistory = false;
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    console.log('destruido')
   }
 
   evitarCerrar(click: Event) {
@@ -57,10 +84,10 @@ export class ModalComponent {
   }
 
   guardarEnOdontrograma() {
-    const {estado, tratamiento, observacion} = this.formularioOdontograma.value;
+    const {estado, observacion} = this.formularioOdontograma.value;
     const idPaciente = this.pacienteService.selectedIdPaciente;
 
-    this.odontologiaService.postDienteOdontograma(idPaciente, estado.ID_ESTADO, observacion, tratamiento)
+    this.odontologiaService.postDienteOdontograma(idPaciente, estado.ID_ESTADO, observacion)
       .subscribe(resp => {
         if(resp.ok) {
           this._sweet.mensajeSimple(
@@ -77,5 +104,63 @@ export class ModalComponent {
           );
         }
       })
+  }
+
+  tratamientoEnOdontrograma() {
+    const {tratamiento} = this.formularioTratamiento.value;
+    const idPaciente = this.pacienteService.selectedIdPaciente;
+
+    this.odontologiaService.putTratamientoDienteOdontograma(idPaciente, tratamiento)
+      .subscribe(resp => {
+        if(resp.ok) {
+          this._sweet.mensajeSimple(
+            resp.msg,
+            'Odontograma',
+            'success'
+          );
+          this.guardarTratamientos();
+          this.viewTratamiento = false;
+        } else {
+          this._sweet.mensajeSimple(
+            resp.msg,
+            'Odontograma',
+            'error'
+          );
+        }
+      })
+  }
+
+  estadoEnOdontrograma() {
+
+    const idPaciente = this.pacienteService.selectedIdPaciente;
+    this._sweet
+    .mensajeConConfirmacion(
+      'Finalizar',
+      '¿Desea finalizar el proceso de la pieza?',
+      'warning'
+    )
+    .then((result) => {
+      if (result) {
+        this.odontologiaService.putEstadoProcesoDienteOdontograma(idPaciente)
+      .subscribe(resp => {
+        if(resp.ok) {
+          this._sweet.mensajeSimple(
+            resp.msg,
+            'Odontograma',
+            'success'
+          );
+          this.closeModal.nativeElement.click()
+          this.viewTratamiento = false;
+        } else {
+          this._sweet.mensajeSimple(
+            resp.msg,
+            'Odontograma',
+            'error'
+          );
+        }
+      })
+      }
+    });
+    
   }
 }

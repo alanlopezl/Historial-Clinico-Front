@@ -14,8 +14,15 @@
             <div class="row text-center">
                 <ng-template #odontograma>
                     <h1 class="text-center"><strong>Odontograma</strong></h1>
-                    <div class="col-lg-4">
-                        <h4><strong>Nombre paciente: </strong>{{pacienteService.selectedNamePaciente}}</h4>
+                    <div class="d-flex justify-content-between mb-3">
+
+                        <div class="d-flex justify-content-start align-items-center">
+                            <h4 class="m-0"><strong>Nombre paciente: </strong>{{pacienteService.selectedNamePaciente}}</h4>
+                        </div>
+                        <div>
+                            <label for="filtro">Seleccione una fecha</label><br>
+                            <input id="filtro" [value]="getDay()" #filtro (change)="cargarDientesOdontograma()" type="date">
+                        </div>
                     </div>
                     <div class="col-lg-12">
                         

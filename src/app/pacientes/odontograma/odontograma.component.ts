@@ -1,4 +1,4 @@
-import { Component, SimpleChanges, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, SimpleChanges, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { PacientesPackageService } from '../pacientes/pacientes-package.service';
 import { Router } from '@angular/router';
 import { OdontogramaService } from './services/odontograma.service';
@@ -14,9 +14,25 @@ export class OdontogramaComponent {
   htmlString: string;
   nativo: any;
 
+  getDay() {
+    let ahora = new Date();
+    return new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate()).toISOString().split('T')[0];
+  }
+
+  loadTodayOdontrogram() {
+    let today = this.getDay();
+    const idPaciente: number = this.pacienteService.selectedIdPaciente;
+    this.odontologiaService.getOdontograma(idPaciente, today)
+      .subscribe(resp => {
+        console.log(resp)
+      });
+  }
+  hoy = new Date()
+
   total: number = 0;
   presupuesto = [];
 
+  @ViewChild('filtro') filtro!: ElementRef;
   @ViewChild(TemplateRef, { static: true }) odontoTemplate: TemplateRef<any>;
   @ViewChild(TemplateRef, { static: true, read: ViewContainerRef })
   odontoContainer: ViewContainerRef;
@@ -30,7 +46,7 @@ export class OdontogramaComponent {
       this._route.navigateByUrl('/pacientes/pacientes');
     } else {
       this.cargarTratamientos();
-      this.cargarDientesOdontograma();
+      this.loadTodayOdontrogram();
       this.cargarEstadosDiente();
     }
   }
@@ -69,8 +85,9 @@ export class OdontogramaComponent {
   }
 
   cargarDientesOdontograma() {
+    this.odontologiaService.fecha = this.filtro.nativeElement.value
     const idPaciente: number = this.pacienteService.selectedIdPaciente;
-    this.odontologiaService.getOdontograma(idPaciente)
+    this.odontologiaService.getOdontograma(idPaciente, this.filtro.nativeElement.value)
       .subscribe(resp => {
         console.log(resp)
       });
@@ -78,7 +95,7 @@ export class OdontogramaComponent {
 
   cargarPresupuesto() {
     const idPaciente: number = this.pacienteService.selectedIdPaciente;
-    this.odontologiaService.getPresupuesto(idPaciente)
+    this.odontologiaService.getPresupuesto(idPaciente, this.filtro.nativeElement.value)
       .subscribe(resp => {
         this.total = resp.total;
         this.presupuesto = resp.presupuesto;
