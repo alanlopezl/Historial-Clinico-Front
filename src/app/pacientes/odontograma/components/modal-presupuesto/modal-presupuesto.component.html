@@ -21,7 +21,7 @@
                         <mat-form-field class="col-3" appearance="outline">
                             <mat-label>Precio</mat-label>
                             <input matInput type="number"
-                                maxlength="250" required [value]="tratamiento.precio_tratamiento" disabled="true" (change)="actualizarTotal(i, $event)">
+                                maxlength="250" required [value]="tratamiento.precio_tratamiento" (change)="actualizarTotal(i, $event)">
     
                         </mat-form-field>
                     </div>

@@ -1,0 +1,25 @@
+
+  
+  
+  /* Estilo para pantallas pequeñas (menos de 768px) */
+  @media (max-width: 1199px) {
+    #sidebar {
+      width: 250px;
+      position: fixed;
+      top: 60px;
+      left: 0;
+      z-index: 9999;
+      display: none;
+      transition: all 0.3s;
+      
+    }
+  
+    #sidebar.active {
+      display: block;
+    }
+  
+    #sidebar-toggle:checked + #sidebar {
+      display: block;
+    }
+  }
+  

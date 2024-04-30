@@ -19,6 +19,18 @@ export class FullComponentComponent {
   empresa: any = [];
   permiso: string = localStorage.getItem('rol');
 
+  sidebarActive = false;
+
+  toggleSidebar() {
+    this.sidebarActive = !this.sidebarActive;
+    let sidebar = document.getElementById('sidebar');
+    if (this.sidebarActive) {
+      sidebar.classList.add('active');
+    } else {
+      sidebar.classList.remove('active');
+    }
+  }
+
   constructor(
     private _service: GlobalService,
     private _alert: SweetAlertService,

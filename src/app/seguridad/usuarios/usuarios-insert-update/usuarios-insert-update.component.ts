@@ -142,6 +142,7 @@ export class UsuariosInsertUpdateComponent implements OnInit {
         };
 
         this._service.actualizar(params).subscribe((resp: any) => {
+          console.log(resp)
           this._sweet.mensajeSimple(
             'Actualizado correctamente',
             'USUARIOS',
